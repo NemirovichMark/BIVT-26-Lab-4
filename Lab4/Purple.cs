@@ -74,10 +74,10 @@
             }
             for (int i = 0; i < answer.Length; i++)
             {
-                if (i < idx)
+                if (i <= idx)
                 {
                     answer[i] = array[i];
-                }else if (i > idx)
+                }else if (i > (idx+1))
                 {
                     answer[i] = array[i-1];
                 }
