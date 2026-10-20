@@ -6,7 +6,25 @@
         {
 
             // code here
-
+            double sum = 0, mx = Double.MinValue;
+            int mxidx = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+                if (array[i] > mx) {
+                    mx = array[i];
+                    mxidx = i+1;
+                }
+            }
+            sum/=array.Length;
+            if (mxidx < array.Length)
+            {
+                for (; mxidx < array.Length; mxidx++)
+                {
+                    array[mxidx] = sum;
+                }
+            }
+            
             // end
 
         }
@@ -15,7 +33,19 @@
             int[] even = null, odd = null;
 
             // code here
-
+            even = new int[array.Length / 2 + array.Length % 2];
+            odd = new int[array.Length / 2];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    even[i/2]=array[i];
+                }
+                else
+                {
+                    odd[(i-1)/2]=array[i];
+                }
+            }
             // end
 
             return (even, odd);
@@ -25,7 +55,37 @@
             int[] answer = null;
 
             // code here
-
+            answer = new int[array.Length+1];
+            double avg = 0, mgn=double.MaxValue;
+            for (int i = 0; i < array.Length; i++)
+            {
+                avg+= array[i];
+            }
+            avg /= array.Length;
+            int idx = 0;
+            for (int i = 0; i < array.Length; i++) {
+                double chk = 0;
+                chk = Math.Abs(avg - array[i]);
+                if (chk < mgn)
+                {
+                    mgn = chk;
+                    idx = i;
+                }
+            }
+            for (int i = 0; i < answer.Length; i++)
+            {
+                if (i < idx)
+                {
+                    answer[i] = array[i];
+                }else if (i > idx)
+                {
+                    answer[i] = array[i-1];
+                }
+                else
+                {
+                    answer[i] = P;
+                }
+            }
             // end
 
             return answer;
