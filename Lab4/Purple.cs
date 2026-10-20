@@ -153,7 +153,30 @@
             int[] answer = null;
 
             // code here
-
+            if (A == null || B == null)
+            {
+                return new int[0];
+            }
+            
+            if (k < 0) k = 0;
+            if (k > A.Length) k = A.Length;
+            answer = new int[A.Length + B.Length];
+            int curI = 0;
+            for (int i = 0; i < k; i++)
+            {
+                answer[curI] = A[i];
+                curI++;
+            }
+            for (int i = 0; i < B.Length; i++)
+            {
+                answer[curI] = B[i];
+                curI++;
+            }
+            for (int i = k; i < A.Length; i++)
+            {
+                answer[curI] = A[i];
+                curI++;
+            }
             // end
 
             return answer;
@@ -163,7 +186,25 @@
             int[] sum = null, dif = null;
 
             // code here
-
+            if (A == null || B == null || A.Length != B.Length)
+            {
+                return (new int[0], new int[0]);
+            }
+        
+            if (A.Length == 0)
+            {
+                return (new int[0], new int[0]);
+            }
+            
+            int l = A.Length;
+            sum = new int[l];
+            dif = new int[l];
+            
+            for (int i = 0; i < l; i++)
+            {
+                sum[i] = A[i] + B[i];
+                dif[i] = A[i] - B[i];
+            }
             // end
 
             return (sum, dif);
@@ -192,7 +233,7 @@
         {
 
             // code here
-
+            
             // end
 
         }
