@@ -7,9 +7,36 @@ namespace Lab4
         public void Task1(int[] array)
         {
 
-            // code here
+                        int maxx = -9999999;
+            int s = 0;
+            int ind = 1000000;
+            int m = 0;
 
-            // end
+            for (int i = 0; i < array.Length; i++)
+            {
+                if ((m == 0) && (array[i] < 0))
+                {
+                    m = i;
+                }
+
+                if (i > ind)
+                {
+                    s += array[i];
+                }
+                
+                if (array[i] > maxx)
+                {
+                    maxx = array[i];
+                    ind = i;
+                    s = 0;
+                }
+
+                if (i+1 == array.Length)
+                {
+                    array[m] = s;
+                }
+
+            }
 
         }
         public int[] Task2(int[] array, int P)
