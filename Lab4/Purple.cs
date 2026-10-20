@@ -6,7 +6,28 @@
         {
 
             // code here
-
+             if (array == null || array.Length == 0)
+             {
+                 return;
+             }
+             double m = array[0];
+             double mIndex = 0;
+             double s = 0;
+             double mid = 0;
+             for (int i = 0; i < array.Length; i++)
+             {
+                 s += array[i];
+                 if (array[i] > m)
+                 {
+                     m = array[i];
+                     mIndex = i;
+                 }
+             }
+             mid = s / array.Length;
+             for (double j = (mIndex + 1); j < array.Length; j++)
+             {
+                 array[(int)j] = mid;
+             }
             // end
 
         }
