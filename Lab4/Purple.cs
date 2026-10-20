@@ -6,7 +6,27 @@
         {
 
             // code here
+            double mx = -999999;
+            double cnt = 0;
+            double s = 0;
+            int index = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                cnt ++;
+                s += array[i];
+                if (mx < array[i])
+                {
+                    mx = array[i];
+                    index = i;
 
+                }
+            }
+            double dl = s / cnt;
+            for (int j = index + 1;  j < array.Length; j++)
+            {
+                array[j] = dl;
+            }
+            return;
             // end
 
         }
@@ -15,7 +35,23 @@
             int[] even = null, odd = null;
 
             // code here
-
+            int cnt1 = (array.Length + 1) / 2;
+            int cnt2 = array.Length / 2;
+            even = new int[cnt1];
+            odd = new int[cnt2];
+            int eEn = 0;
+            int oEn = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    even[eEn++] = array[i];
+                }
+                else
+                {
+                    odd[oEn++] = array[i];
+                }
+            }
             // end
 
             return (even, odd);
@@ -25,6 +61,36 @@
             int[] answer = null;
 
             // code here
+            answer = new int[array.Length+1];
+            double s = 0;
+            double cnt = 0;
+            double dl = 0;
+            double mn = 99999999;
+            int inA = 0;
+            int index = 0;
+            int index2 = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                s += array[i];
+                cnt++;
+            }
+            dl = s / cnt;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (Math.Abs(array[i] - dl) < mn)
+                {
+                    mn = Math.Abs(array[i] - dl);
+                    index = i;
+                }
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                answer[index2++] = array[i];
+                if (i == index)
+                {
+                    answer[index2++] = P;
+                }
+            }
 
             // end
 
@@ -34,7 +100,33 @@
         {
 
             // code here
-
+            int p = 0;
+            int m = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0) p++;
+                else m++;
+            }
+            int[] plus = new int[p];
+            int[] mins = new int[m];
+            int inp = 0;
+            int inm = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0) plus[inp++] = array[i];
+                else mins[inm++] = array[i];
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i < p)
+                {
+                    array[i] = plus[i];
+                }
+                else
+                {
+                    array[i] = mins[i - p];
+                }
+            }
             // end
 
         }
