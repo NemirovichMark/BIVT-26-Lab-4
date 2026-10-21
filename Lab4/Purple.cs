@@ -133,11 +133,24 @@
         public int[] Task5(int[] A, int[] B, int k)
         {
             int[] answer = null;
-
             // code here
-
+            if (k > A.Length) return A;
+            answer = new int[A.Length + B.Length];
+            int st = 0;
+            if (k > A.Length) k = A.Length;
+            for (int i = 0; i < k; i++)
+            {
+                answer[st++] = A[i];
+            }
+            for (int j = 0; j < B.Length; j++)
+            {
+                answer[st++] = B[j];
+            }
+            for (int i = k; i < A.Length; i++)
+            {
+                answer[st++] = A[i];
+            }
             // end
-
             return answer;
         }
         public (int[] sum, int[] dif) Task6(int[] A, int[] B)
@@ -145,7 +158,16 @@
             int[] sum = null, dif = null;
 
             // code here
-
+            if (A.Length == B.Length)
+            {
+                sum = new int[A.Length];
+                dif = new int[A.Length];
+                for (int i = 0; i < sum.Length; i++)
+                {
+                    sum[i] = A[i] + B[i];
+                    dif[i] = A[i] - B[i];
+                }
+            } else return (sum, dif);
             // end
 
             return (sum, dif);
@@ -155,9 +177,26 @@
             double[] normalized = null;
 
             // code here
+            int mx = -99999999;
+            int mn = 99999999;
+            normalized = new double[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                mx = Math.Max(mx, array[i]);
+                mn = Math.Min(mn, array[i]);
+            }
 
+            if (mx - mn == 0)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                normalized[i] = -1 + 2 * ((array[i] - mn) / (double)(mx - mn));
+            }
             // end
-            
+
             return normalized;
         }
         public int[] Task8(int[] A, int[] B)
