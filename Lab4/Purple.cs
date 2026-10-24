@@ -12,7 +12,7 @@ namespace Lab4
             int index = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                cnt ++;
+                cnt++;
                 s += array[i];
                 if (mx < array[i])
                 {
@@ -22,7 +22,7 @@ namespace Lab4
                 }
             }
             double dl = s / cnt;
-            for (int j = index + 1;  j < array.Length; j++)
+            for (int j = index + 1; j < array.Length; j++)
             {
                 array[j] = dl;
             }
@@ -61,7 +61,7 @@ namespace Lab4
             int[] answer = null;
 
             // code here
-            answer = new int[array.Length+1];
+            answer = new int[array.Length + 1];
             double s = 0;
             double cnt = 0;
             double dl = 0;
@@ -167,7 +167,8 @@ namespace Lab4
                     sum[i] = A[i] + B[i];
                     dif[i] = A[i] - B[i];
                 }
-            } else return (sum, dif);
+            }
+            else return (sum, dif);
             // end
 
             return (sum, dif);
@@ -205,14 +206,14 @@ namespace Lab4
 
             // code here
             C = new int[A.Length + B.Length];
-            for (int i = 0; i < A.Length-1; i++)
+            for (int i = 0; i < A.Length - 1; i++)
             {
-                for (int j = 0; j < A.Length-1; j++)
+                for (int j = 0; j < A.Length - 1; j++)
                 {
-                    if (A[j] < A[j+1])
+                    if (A[j] < A[j + 1])
                     {
-                        int ch = i;
-                        A[j] = A[j+1];
+                        int ch = A[j];
+                        A[j] = A[j + 1];
                         A[j + 1] = ch;
 
                     }
@@ -225,7 +226,7 @@ namespace Lab4
                 {
                     if (B[j] < B[j + 1])
                     {
-                        int ch = i;
+                        int ch = B[j];
                         B[j] = B[j + 1];
                         B[j + 1] = ch;
 
@@ -233,7 +234,7 @@ namespace Lab4
                 }
             }
             int cnA = 0, cnB = 0, cnC = 0;
-            while (cnA <  A.Length && cnB < B.Length)
+            while (cnA < A.Length && cnB < B.Length)
             {
                 if (A[cnA] >= B[cnB])
                 {
@@ -272,28 +273,28 @@ namespace Lab4
             int mx = int.MinValue;
             for (int i = 0; i < array.Length; i++)
             {
-                if(array[i] >= mx)
+                if (array[i] > mx)
                 {
                     mx = array[i];
                 }
             }
             for (int i = 0; i < array.Length; i++)
             {
-                if(mx == array[i])
+                if (mx == array[i])
                 {
                     index = i;
                     break;
                 }
             }
-            int[] nwArray = new int[array.Length + index];
+            if (index == 0) return;
+            int[] nwArray = new int[array.Length];
             for (int i = 0; i < array.Length; i++)
             {
-                nwArray[i] = array[i];
+                nwArray[(i + index) % array.Length] = array[i];
             }
-            array = nwArray;
-            for (int i = 0; i < array.Length - index; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                array[i] = array[i + index];
+                array[i] = nwArray[i];
             }
             // end
 
@@ -302,7 +303,12 @@ namespace Lab4
         {
 
             // code here
-
+            if (N == 0) return;
+            int minKolvo = Math.Min(N - 1, array.Length - N);
+            for (int i = 0; i < minKolvo; i++)
+            {
+                array[N + i] = array[N-2-i];
+            }
             // end
 
         }
@@ -329,4 +335,4 @@ namespace Lab4
             return (bright, normal, dim);
         }
     }
- }
+}
