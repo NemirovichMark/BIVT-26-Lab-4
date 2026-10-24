@@ -1,4 +1,4 @@
-﻿namespace Lab4
+namespace Lab4
 {
     public class Purple
     {
@@ -204,7 +204,62 @@
             int[] C = null;
 
             // code here
+            C = new int[A.Length + B.Length];
+            for (int i = 0; i < A.Length-1; i++)
+            {
+                for (int j = 0; j < A.Length-1; j++)
+                {
+                    if (A[j] < A[j+1])
+                    {
+                        int ch = i;
+                        A[j] = A[j+1];
+                        A[j + 1] = ch;
 
+                    }
+                }
+            }
+
+            for (int i = 0; i < B.Length - 1; i++)
+            {
+                for (int j = 0; j < B.Length - 1; j++)
+                {
+                    if (B[j] < B[j + 1])
+                    {
+                        int ch = i;
+                        B[j] = B[j + 1];
+                        B[j + 1] = ch;
+
+                    }
+                }
+            }
+            int cnA = 0, cnB = 0, cnC = 0;
+            while (cnA <  A.Length && cnB < B.Length)
+            {
+                if (A[cnA] >= B[cnB])
+                {
+                    C[cnC] = A[cnA];
+                    cnA++;
+                }
+                else
+                {
+                    C[cnC] = B[cnB];
+                    cnB++;
+                }
+                cnC++;
+            }
+
+            while (cnA < A.Length)
+            {
+                C[cnC] = A[cnA];
+                cnA++;
+                cnC++;
+            }
+            while (cnB < B.Length)
+            {
+                C[cnC] = B[cnB];
+                cnB++;
+                cnC++;
+            }
             // end
 
             return C;
@@ -213,7 +268,33 @@
         {
 
             // code here
-
+            int index = 0;
+            int mx = int.MinValue;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if(array[i] >= mx)
+                {
+                    mx = array[i];
+                }
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                if(mx == array[i])
+                {
+                    index = i;
+                    break;
+                }
+            }
+            int[] nwArray = new int[array.Length + index];
+            for (int i = 0; i < array.Length; i++)
+            {
+                nwArray[i] = array[i];
+            }
+            array = nwArray;
+            for (int i = 0; i < array.Length - index; i++)
+            {
+                array[i] = array[i + index];
+            }
             // end
 
         }
