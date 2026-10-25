@@ -7,7 +7,17 @@
             double length = 0;
 
             // code here
+         double sum = 0;
 
+for (int i = 0; i < vector.Length; i++)
+{
+    sum += (double)vector[i] * vector[i];
+}
+
+while (length * length <= sum)
+{
+    length += 0.00001;
+}
             // end
 
             return length;
@@ -17,7 +27,19 @@
             int count = 0;
 
             // code here
+            int low = P < Q ? P : Q;
+            int high = P > Q ? P : Q;
+            
 
+            for (int i = 0; i < array.Length; i++)
+{
+        if (array[i] > low && array[i] < high)
+    {
+        count++;
+    }
+}
+
+return count;
             // end
 
             return count;
