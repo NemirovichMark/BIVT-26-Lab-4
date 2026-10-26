@@ -214,7 +214,43 @@
             double[] normalized = null;
 
             // code here
-
+            if (array == null || array.Length == 0)
+            {
+                return new double[0];
+            }
+            bool flag = true;
+            int first = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (first != array[i])
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if (flag)
+            {
+                return null;
+            }
+            
+            normalized = new double[array.Length];
+            int min = array[0];
+            int max = array[0];
+            
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] < min) min = array[i];
+                if (array[i] > max) max = array[i];
+            }
+            
+            int range = max - min;
+            
+            for (int k = 0; k < array.Length; k++)
+            {
+                double a1 = (double)(array[k] - min) / range * 2 - 1;
+                normalized[k] = a1;
+            }
             // end
             
             return normalized;
@@ -224,7 +260,85 @@
             int[] C = null;
 
             // code here
-
+            if (A == null || B == null)
+            {
+                return new int[0];
+            }
+            
+            if (A.Length == 0 && B.Length == 0)
+            {
+                return new int[0];
+            }
+            
+            int[] sortedA = new int[A.Length];
+            
+            for (int i = 0; i < A.Length; i++) sortedA[i] = A[i];
+            
+            int[] sortedB = new int[B.Length];
+            
+            for (int i = 0; i < B.Length; i++) sortedB[i] = B[i];
+            
+            for (int i = 1; i < sortedA.Length; i++)
+            {
+                int key = sortedA[i];
+                int j = i - 1;
+            
+                while (j >= 0 && sortedA[j] < key)
+                {
+                    sortedA[j + 1] = sortedA[j];
+                    j--;
+                }
+            
+                sortedA[j + 1] = key;
+            }
+            
+            for (int i = 1; i < sortedB.Length; i++)
+            {
+                int key = sortedB[i];
+                int j = i - 1;
+            
+                while (j >= 0 && sortedB[j] < key)
+                {
+                    sortedB[j + 1] = sortedB[j];
+                    j--;
+                }
+            
+                sortedB[j + 1] = key;
+            }
+            
+            C = new int[sortedA.Length + sortedB.Length];
+            int iA = 0;
+            int iB = 0;
+            int iC = 0;
+            
+            while (iA < sortedA.Length && iB < sortedB.Length)
+            {
+                if (sortedA[iA] >= sortedB[iB])
+                {
+                    C[iC] = sortedA[iA];
+                    iA++;
+                }
+                else
+                {
+                    C[iC] = sortedB[iB];
+                    iB++;
+                }
+                iC++;
+            }
+            
+            while (iA < sortedA.Length)
+            {
+                C[iC] = sortedA[iA];
+                iA++;
+                iC++;
+            }
+            
+            while (iB < sortedB.Length)
+            {
+                C[iC] = sortedB[iB];
+                iB++;
+                iC++;
+            }
             // end
 
             return C;
@@ -233,7 +347,38 @@
         {
 
             // code here
+            if (array == null || array.Length == 0)
+            {
+                return;
+            }
             
+            int max = array[0];
+            int maxI = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > max)
+                {
+                    max = array[i];
+                    maxI = i;
+                }
+            }
+            
+            if (maxI == 0)
+            {
+                return;
+            }
+            int[] temp = new int[array.Length];
+            
+            for (int i = 0; i < array.Length; i++)
+            {
+                int newI = (i + maxI) % array.Length;
+                temp[newI] = array[i];
+            }
+            
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = temp[i];
+            }
             // end
 
         }
@@ -241,7 +386,23 @@
         {
 
             // code here
-
+            if (array == null || array.Length == 0 || N < 1 || N > array.Length)
+            {
+                return;
+            }
+            
+            int nI = N - 1;
+            int elLeft = N - 1;
+            
+            for (int i = 1; i <= elLeft; i++)
+            {
+                if (nI + i >= array.Length)
+                {
+                    break;
+                }
+            
+                array[nI + i] = array[nI - i];
+            }
             // end
 
         }
