@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Lab4
 {
@@ -6,67 +6,186 @@ namespace Lab4
     {
         public void Task1(int[] array)
         {
+            int n = array.Length;
+            int maxIndex = 0;
+            int negIndex = -1;
 
-            // code here
+            for (int i = 0; i < n; i++)
+            {
+                if (array[i] > array[maxIndex])
+                {
+                    maxIndex = i;
+                }
+            }
 
-            // end
+            for (int i = 0; i < n; i++)
+            {
+                if (array[i] < 0)
+                {
+                    negIndex = i;
+                    break;
+                }
+            }
 
+            if (negIndex == -1) return;
+
+            int s = 0;
+
+            for (int i = maxIndex + 1; i < n; i++)
+            {
+                s += array[i];
+            }
+
+            array[negIndex] = s;
         }
         public int[] Task2(int[] array, int P)
         {
             int[] answer = null;
+            int n = array.Length;
+            int posIndex = -1;
 
-            // code here
+            for (int i = 0; i < n; i++)
+            {
+                if (array[i] > 0)
+                {
+                    posIndex = i;
+                }
+            }
 
-            // end
+            if (posIndex == -1)
+            {
+                answer = new int[n];
+                for (int i = 0; i < n; i++)
+                {
+                    answer[i] = array[i];
+                }
+            }
+            else
+            {
+                answer = new int[n + 1];
+                for (int i = 0; i <= posIndex; i++)
+                {
+                    answer[i] = array[i];
+                }
 
+                answer[posIndex + 1] = P;
+
+                for (int i = posIndex + 1; i < n; i++)
+                {
+                    answer[i + 1] = array[i];
+                }
+            }
+            
             return answer;
         }
         public int[] Task3(int[] array)
         {
             int[] answer = null;
+            int n = array.Length;
+            int minIndex = -1;
+            
+            for (int i = 0; i < n; i++)
+            {
+                if ((array[i] > 0) && (minIndex == -1 || array[i] < array[minIndex]))
+                {
+                    minIndex = i;
+                }
+            }
 
-            // code here
-
-            // end
+            if (minIndex == -1)
+            {
+                answer = new int[n];
+                for (int  i = 0; i < n; i++)
+                {
+                    answer[i] = array[i];
+                }
+            }
+            else
+            {
+                answer = new int[n - 1];
+                for (int i = 0; i < minIndex; i++)
+                {
+                    answer[i] = array[i];
+                }
+                for (int i = minIndex + 1; i < n; i++)
+                {
+                    answer[i-1] = array[i];
+                }
+            }
 
             return answer;
         }
         public void Task4(double[] array)
         {
+            double s = 0;
+            double n = array.Length;
 
-            // code here
+            for (int i = 0; i < n; i++)
+            {
+                s += array[i];
+            }
 
-            // end
+            double avg = s / n;
 
+            for (int i = 0; i < n; i++)
+            {
+                array[i] -= avg;
+            }
         }
         public int Task5(int[] A, int[] B)
         {
             int sum = 0;
+            int lenA = A.Length;
+            int lenB = B.Length;
 
-            // code here
+            if (lenA != lenB) return 0;
 
-            // end
-
+            for (int i = 0; i < lenA; i++)
+            {
+                sum += A[i] * B[i];
+            }
+            
             return sum;
         }
         public int[] Task6(int[] array)
         {
             int[] indexes = null;
+            double s = 0;
+            double n = array.Length;
 
-            // code here
+            for (int i = 0; i < n; i++)
+            {
+                s += array[i];
+            }
+            double avg = s / n;
 
-            // end
+            int c = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (array[i] < avg)
+                {
+                    c++;
+                }
+            }
+
+            indexes = new int[c];
+            int k = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (array[i] < avg)
+                {
+                    indexes[k] = i;
+                    k++;
+                }
+            }
 
             return indexes;
         }
         public int Task7(int[] array)
         {
             int count = 0;
-
-            // code here
-
-            // end
+            int n = array.Length;
+            
 
             return count;
         }
