@@ -48,7 +48,39 @@ return count;
         {
 
             // code here
+            if (array.Length < 2)
+    {
+    return;
+    }
 
+int maxIndex = 0;
+
+    for (int i = 1; i < array.Length; i++)
+    {
+    if (array[i] > array[maxIndex])
+    {
+        maxIndex = i;
+    }
+}
+
+if (maxIndex == array.Length - 1)
+{
+    return;
+}
+
+int minIndex = maxIndex + 1;
+
+for (int i = maxIndex + 2; i < array.Length; i++)
+{
+    if (array[i] < array[minIndex])
+    {
+        minIndex = i;
+    }
+}
+
+int temp = array[maxIndex];
+array[maxIndex] = array[minIndex];
+array[minIndex] = temp;
             // end
 
         }
