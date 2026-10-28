@@ -303,7 +303,6 @@
                     index++;
                 }
             }
-        }
             // end
             return cleared;
         }
@@ -319,7 +318,7 @@
                 double count = 0;
                 for (int i = 0;i < n;i++)
                 {
-                    A[i] = a + i * step
+                    A[i] = a + i * step;
                     if (A[i] > 0)
                     {
                         s += A[i];
