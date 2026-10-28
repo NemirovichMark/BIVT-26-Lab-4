@@ -250,15 +250,18 @@ namespace Lab4
             // code here
             int ind_max = 0;
             int maxx = int.MinValue;
-            for (int i = 0; i < array.Length; ++i) {
-                if (array[i] > maxx) {
+            for (int i = 0; i < array.Length; ++i)
+            {
+                if (array[i] > maxx)
+                {
                     maxx = array[i];
                     ind_max = i;
                 }
             }
-            int[] ost = new int[array.Length - ind_max];
+            int[] ost = new int[ind_max];
             int ind_ost = 0;
-            for (int i = ind_max; i < array.Length; ++i) {
+            for (int i = array.Length - ind_max; i < array.Length; ++i)
+            {
                 ost[ind_ost] = array[i];
                 ++ind_ost;
             }
@@ -266,7 +269,8 @@ namespace Lab4
             {
                 array[i] = array[i - ind_max];
             }
-            for (int i = 0; i < ost.Length; ++i) {
+            for (int i = 0; i < ost.Length; ++i)
+            {
                 array[i] = ost[i];
             }
 
@@ -277,7 +281,13 @@ namespace Lab4
         {
 
             // code here
-
+            int ind = N - 1;
+            int ind_append = ind + 1;
+            for (int i = ind - 1; i >= 0 && ind_append < array.Length; --i)
+            {
+                array[ind_append] = array[i];
+                ++ind_append;
+            }
             // end
 
         }
@@ -287,7 +297,35 @@ namespace Lab4
             double[] Xext = null, Yext = null;
 
             // code here
+            if (a >= b && n > 1)
+                return (null, null);
+            X = new double[n];
+            Y = new double[n];
+            double step = (b - a) / (n - 1), meaning = a;
+            for (int i = 0; i < n; ++i)
+            {
+                X[i] = meaning;
+                Y[i] = Math.Cos(meaning) + meaning * Math.Sin(meaning);
+                meaning += step;
+            }
+            int count_ext = 0;
+            for (int i = 1; i < Y.Length - 1; ++i)
+            {
+                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) || (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
+                    ++count_ext;
+            }
+            Xext = new double[count_ext];
+            Yext = new double[count_ext];
 
+            for (int i = 1, ind_ext = 0; i < Y.Length - 1; ++i)
+            {
+                if (Y[i] > Y[i - 1] && Y[i] > Y[i + 1] || Y[i] < Y[i - 1] && Y[i] < Y[i + 1])
+                {
+                    Yext[ind_ext] = Y[i];
+                    Xext[ind_ext] = X[i];
+                    ++ind_ext;
+                }
+            }
             // end
 
             return (Xext, Yext);
@@ -298,7 +336,84 @@ namespace Lab4
             double[] bright = null, normal = null, dim = null;
 
             // code here
+            double summ = 0, count = 0;
+            for (int i = 0; i < raw.Length; ++i)
+            {
+                summ += raw[i];
+                ++count;
+            }
+            double sr = summ / count;
+            int count_bright = 0, count_dim = 0;
+            for (int i = 0; i < raw.Length; ++i)
+            {
+                if (raw[i] > (sr * 2))
+                    ++count_bright;
+                if (raw[i] < (sr / 2))
+                    ++count_dim;
+            }
+            bright = new double[count_bright];
+            dim = new double[count_dim];
+            normal = new double[raw.Length];
+            // a
+            int[] inds_bright_dim = new int[count_bright + count_dim];
+            for (int i = 0, ind_bright = 0, ind_dim = 0, ind_normal = 0, ind_inds_bright_dim = 0; i < raw.Length; ++i)
+            {
+                if (raw[i] > (sr * 2))
+                {
+                    inds_bright_dim[ind_inds_bright_dim] = i;
+                    ++ind_inds_bright_dim;
+                    bright[ind_bright] = raw[i];
+                    ++ind_bright;
+                }
+                else if (raw[i] < (sr / 2))
+                {
+                    inds_bright_dim[ind_inds_bright_dim] = i;
+                    ++ind_inds_bright_dim;
+                    dim[ind_dim] = raw[i];
+                    ++ind_dim;
+                }
+                else
+                {
+                    normal[ind_normal] = raw[i];
+                    ++ind_normal;
+                }
+            }
+            // b
+            double summ_ost = 0, count_ost = 0;
+            for (int i = 0; i < normal.Length; ++i)
+            {
+                summ_ost += normal[i];
+                ++count_ost;
+            }
+            double sr_ost = summ_ost / (count_ost - inds_bright_dim.Length);
+            // c
+            for (int i = 0; i < inds_bright_dim.Length; ++i)
+            {
+                int current_ind = inds_bright_dim[i];
+                for (int j = normal.Length - 1; j > current_ind; --j)
+                {
+                    normal[j] = normal[j - 1];
+                }
+                normal[current_ind] = 0;
+            }
+            for (int i = 0; i < inds_bright_dim.Length; ++i)
+            {
+                normal[inds_bright_dim[i]] = (sr_ost + raw[inds_bright_dim[i]]) / 2;
+            }
 
+            // d
+            for (int i = 0; i < normal.Length; ++i)
+            {
+                for (int j = 0; j < normal.Length - i - 1; ++j)
+                {
+                    if (normal[j] < normal[j + 1])
+                    {
+                        double temp = normal[j + 1];
+                        normal[j + 1] = normal[j];
+                        normal[j] = temp;
+                    }
+                }
+            }
             // end
 
             return (bright, normal, dim);
