@@ -1,4 +1,3 @@
-
 using System.Runtime.InteropServices;
 
 namespace Lab4
@@ -136,7 +135,6 @@ namespace Lab4
                     array[i] = array[i] - srednee;
                 }
             }
-            
             // end
 
         }
@@ -233,7 +231,6 @@ namespace Lab4
                     }
                 }
             }
-           
             // end
 
             return count;
@@ -285,9 +282,6 @@ namespace Lab4
                     }
                 }
             }
-            
-
-
             // end
 
             return normalized;
