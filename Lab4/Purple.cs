@@ -1,4 +1,6 @@
-﻿namespace Lab4
+﻿using System.Numerics;
+
+namespace Lab4
 {
     public class Purple
     {
@@ -92,9 +94,34 @@
         }
         public void Task4(int[] array)
         {
-
             // code here
-
+            int[] pl = new int[array.Length];
+            int idx = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                int j = array[i];
+                if (j >= 0)
+                {
+                    pl[idx] = j;
+                    Console.WriteLine("{0}, {1}, {2}", j, pl[idx], idx);
+                    idx++;
+                }
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                int j = array[i];
+                if (j < 0)
+                {
+                    pl[idx] = j;
+                    Console.WriteLine("{0}, {1}, {2}", j, pl[idx], idx);
+                    idx++;
+                }
+            }
+                array = pl;
+            for (int i = 0; i < pl.Length; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
             // end
 
         }
@@ -103,6 +130,26 @@
             int[] answer = null;
 
             // code here
+            answer = new int[A.Length + B.Length];
+            if (k <= A.Length)
+            {
+                for (int i = 0; i < answer.Length; i++)
+                {
+                    if (i <= k)
+                    {
+                        answer[i] = A[i];
+                    }
+                    else if (i <= k + B.Length)
+                    {
+                        answer[i] = B[i - k - 1];
+                    }
+                    else
+                    {
+                        answer[i] = A[i - B.Length];
+                    }
+                }
+            }
+
 
             // end
 
@@ -113,7 +160,17 @@
             int[] sum = null, dif = null;
 
             // code here
+            if (A.Length == B.Length)
+            {
+                sum = new int[A.Length];
+                dif = new int[A.Length];
 
+                for (int i = 0; i < A.Length; i++)
+                {
+                    sum[i] = A[i] + B[i];
+                    dif[i] = A[i] - B[i];
+                }
+            }
             // end
 
             return (sum, dif);
@@ -123,10 +180,30 @@
             double[] normalized = null;
 
             // code here
+            //Different normalization
+            double mx = 0;
+            int lel = array[0], flag = 0;
+            for(int i=0; i < array.Length; i++)
+            {
+                if (Math.Abs(array[i]) > mx)
+                {
+                    mx=Math.Abs(array[i]);
+                }
+                if (array[i] != lel)
+                {
+                    flag = 1;
+                }
+            }
+            if ((flag==1)&&(mx>1)){
+                normalized= new double[array.Length];
+                for(int i=0; i < array.Length; i++)
+                {
+                    normalized[i]=array[i]/mx;
+                }
+            }
+                // end
 
-            // end
-            
-            return normalized;
+                return normalized;
         }
         public int[] Task8(int[] A, int[] B)
         {
