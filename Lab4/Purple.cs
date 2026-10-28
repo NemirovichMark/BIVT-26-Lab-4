@@ -257,14 +257,17 @@
         {
             double[] bright = null, normal = new double[raw.Length], dim = null;
             int b = 0, d = 0;
+            
             double s = 0;
-            for (int i = 0; i < raw.Length; i++)
+            for (int i = 0; i < raw.Length; i++) // среднее от сырого
             {
                 s += raw[i];
             }
             s /= raw.Length;
-            double[] xd = new double[raw.Length];
-            for (int i = 0; i < raw.Length; i++)
+            
+            double[] xd = new double[raw.Length]; // единый переходной массив со светлыми и тусклыми
+            
+            for (int i = 0; i < raw.Length; i++) // светлые
             {
                 if (raw[i] > 2 * s)
                 {
@@ -272,7 +275,8 @@
                     b++;
                 }
             }
-            for (int i = 0; i < raw.Length; i++)
+            
+            for (int i = 0; i < raw.Length; i++) // тусклые
             { 
                 if (raw[i] < s / 2)
                 {
@@ -281,7 +285,8 @@
                 }
                 if (raw[i] <= 2 * s && raw[i] >= s / 2) normal[i] = raw[i];
             }
-            int[] bi = new int[b];
+            
+            int[] bi = new int[b]; // индексы светлых и тусклых и их поиск
             int[] di = new int[d];
             for (int i = 0, bb = 0, dd = 0; i < raw.Length; i++)
             {
@@ -296,6 +301,7 @@
                     dd++;
                 }
             }
+            
             bright = new double[b];
             dim = new double[d];
             for (int i = 0; i < b + d; i++)
@@ -309,17 +315,20 @@
                     dim[i - b] = xd[i];
                 }
             }
+            
             double sr = 0;
-            for (int i = 0; i < normal.Length; i++) sr += normal[i];
+            for (int i = 0; i < normal.Length; i++) sr += normal[i]; // среднее отчищенного массива
             sr /= normal.Length - b - d;
+            
             for (int i = 0; i < b; i++)
             {
-                normal[bi[i]] = (sr + bright[i]) / 2;
+                normal[bi[i]] = (sr + bright[i]) / 2; // замена нуликов из нормала на полусуммы
             }
             for (int i = 0; i < d; i++)
             {
                 normal[di[i]] = (sr + dim[i]) / 2;
             }
+            
             int n = normal.Length;
             int j = 1;
             while (j < n)
@@ -330,10 +339,11 @@
                 }
                 else
                 {
-                    (normal[j], normal[j - 1]) = (normal[j - 1], normal[j]);
+                    (normal[j], normal[j - 1]) = (normal[j - 1], normal[j]); // гномик сортит
                     j--;
                 }
             }
+            
             return (bright, normal, dim);
         }
     }
