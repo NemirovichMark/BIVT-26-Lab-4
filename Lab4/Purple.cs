@@ -120,22 +120,25 @@ namespace Lab4
             int[] answer = null;
 
             // code here
+            if (k < 0 || k > A.Length) {
+                return A;
+            }
+            if (B == null || B.Length == 0) {
+                return A;
+            }
             answer = new int[A.Length + B.Length];
-            for (int i = 0; i < A.Length; ++i)
+            for (int i = 0; i < k; ++i)
             {
                 answer[i] = A[i];
             }
-            int shift = B.Length;
-            for (int i = answer.Length - 1; i > k - 1 + shift; --i)
+            for (int i = 0; i < B.Length; ++i)
             {
-                answer[i] = answer[i - shift];
+                answer[k + i] = B[i];
             }
-            int temp = k;
-            for (int i = 0; i < B.Length; i++)
+            for (int i = k; i < A.Length; ++i)
             {
-                answer[temp + i] = B[i];
+                answer[i + B.Length] = A[i];
             }
-
             // end
 
             return answer;
