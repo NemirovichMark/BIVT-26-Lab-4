@@ -120,6 +120,21 @@ namespace Lab4
             int[] answer = null;
 
             // code here
+            answer = new int[A.Length + B.Length];
+            for (int i = 0; i < A.Length; ++i)
+            {
+                answer[i] = A[i];
+            }
+            int shift = B.Length;
+            for (int i = answer.Length - 1; i > k - 1 + shift; --i)
+            {
+                answer[i] = answer[i - shift];
+            }
+            int temp = k;
+            for (int i = 0; i < B.Length; i++)
+            {
+                answer[temp + i] = B[i];
+            }
 
             // end
 
@@ -130,7 +145,17 @@ namespace Lab4
             int[] sum = null, dif = null;
 
             // code here
-
+            if (A == null || B == null || A.Length != B.Length)
+            {
+                return (null, null);
+            }
+            sum = new int[A.Length];
+            dif = new int[A.Length];
+            for (int i = 0; i < A.Length; ++i)
+            {
+                sum[i] = A[i] + B[i];
+                dif[i] = A[i] - B[i];
+            }
             // end
 
             return (sum, dif);
@@ -140,18 +165,82 @@ namespace Lab4
             double[] normalized = null;
 
             // code here
-
+            normalized = new double[array.Length];
+            double maxx = int.MinValue;
+            double minn = int.MaxValue;
+            for (int i = 0; i < array.Length; ++i) {
+                if (array[i] > maxx)
+                    maxx = array[i];
+                if (array[i] < minn)
+                    minn = array[i];    
+            }
+            if (maxx == minn)
+                return null;
+            for (int i = 0; i < array.Length; ++i) {
+                normalized[i] = 2 * (array[i] - minn) / (maxx - minn) - 1;
+            }
             // end
-            
-            return normalized;
+
+            return normalized;  
         }
         public int[] Task8(int[] A, int[] B)
         {
             int[] C = null;
 
             // code here
+            C = new int[A.Length + B.Length];
+            for (int i = 0; i < A.Length; ++i) {
+                for (int j = 0; j < A.Length - i - 1; ++j) {
+                    if (A[j] < A[j + 1]) {
+                        int temp = A[j];
+                        A[j] = A[j + 1];
+                        A[j + 1] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < B.Length; ++i)
+            {
+                for (int j = 0; j < B.Length - i - 1; ++j)
+                {
+                    if (B[j] < B[j + 1])
+                    {
+                        int temp = B[j];
+                        B[j] = B[j + 1];
+                        B[j + 1] = temp;
+                    }
+                }
+            }
+            int ind_A = 0, ind_B = 0, ind_C = 0;
+            while (ind_A < A.Length && ind_B < B.Length) {
+                if (A[ind_A] > B[ind_B])
+                {
+                    C[ind_C] = A[ind_A];
+                    ++ind_A;
+                }
+                else
+                {
+                    C[ind_C] = B[ind_B];
+                    ++ind_B;
+                }
+                ++ind_C;
+            }
 
+            while (ind_A < A.Length)
+            {
+                C[ind_C] = A[ind_A];
+                ++ind_A;
+                ++ind_C;
+            }
+
+            while (ind_B < B.Length)
+            {
+                C[ind_C] = B[ind_B];
+                ++ind_B;
+                ++ind_C;
+            }
             // end
+
+
 
             return C;
         }
@@ -159,6 +248,27 @@ namespace Lab4
         {
 
             // code here
+            int ind_max = 0;
+            int maxx = int.MinValue;
+            for (int i = 0; i < array.Length; ++i) {
+                if (array[i] > maxx) {
+                    maxx = array[i];
+                    ind_max = i;
+                }
+            }
+            int[] ost = new int[array.Length - ind_max];
+            int ind_ost = 0;
+            for (int i = ind_max; i < array.Length; ++i) {
+                ost[ind_ost] = array[i];
+                ++ind_ost;
+            }
+            for (int i = array.Length - 1; i >= ind_max; --i)
+            {
+                array[i] = array[i - ind_max];
+            }
+            for (int i = 0; i < ost.Length; ++i) {
+                array[i] = ost[i];
+            }
 
             // end
 
