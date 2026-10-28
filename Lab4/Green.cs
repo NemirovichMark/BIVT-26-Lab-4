@@ -45,12 +45,10 @@
                     break;
                 }
             }
-
             if (otr == -1)
             {
                 return 0;
             }
-
             return sum;
             // end
             return sum;
@@ -209,7 +207,6 @@
                     max = array[i];
                 }
             }
-
             for (int i = 0; i < array.Length; i++)
             {
                 d = array[i];
@@ -239,7 +236,6 @@
                     {
                         max = length + 1;
                     }
-
                     length = 0;
                 }
 
@@ -283,7 +279,6 @@
                         break;
                     }
                 }
-
                 if (!dupl)
                 {
                     count++;
@@ -302,7 +297,6 @@
                         break;
                     }
                 }
-
                 if (!dupl)
                 {
                     cleared[index] = array[i];
@@ -358,7 +352,20 @@
         {
             int wins = 0;
             // code here
-            
+            int six = 0;
+            for (int i = 0;i < dices.Length;i++)
+            {
+                int player = Math.Max(1,dices[i] - six);
+                int cheater = Math.Max(1,6 - i);
+                if (player > cheater)
+                {
+                    wins++;
+                }
+                if (dices[i] == 6)
+                {
+                    six++;
+                }
+            }
             // end
             return wins;
 
