@@ -150,60 +150,190 @@
         }
         public double[] Task7(int[] array)
         {
-            double[] normalized = null;
-
-            // code here
-
-            // end
+            double[] normalized = new double[array.Length];
+            double mx = array[0], mn = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                mx = Math.Max(mx, array[i]);
+                mn = Math.Min(mn, array[i]);
+            }
+            if (mn == mx) return null;
             
+            for (int i = 0; i < array.Length; i++)
+            {
+                normalized[i] = -1 + (2 * (array[i] - mn) / (mx - mn));
+            }
             return normalized;
         }
         public int[] Task8(int[] A, int[] B)
         {
-            int[] C = null;
-
-            // code here
-
-            // end
-
+            int[] C = [..A, ..B];
+            int n = C.Length;
+            int i = 1;
+            while (i < n)
+            {
+                if (i == 0 || C[i] <= C[i - 1])
+                {
+                    i++;
+                }
+                else 
+                {
+                    (C[i], C[i - 1]) = (C[i - 1], C[i]);
+                    i--;
+                }
+            }
             return C;
         }
         public void Task9(int[] array)
         {
-
-            // code here
-
-            // end
-
+            int mxi = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > array[mxi])
+                {
+                    mxi = i;
+                }
+            }
+            int c;
+            for (; mxi > 0; mxi--)
+            {
+                c = array[array.Length - 1];
+                for (int j = array.Length - 1; j > 0; j--)
+                {
+                    array[j] = array[j - 1];
+                }
+                array[0] = c;
+            }
         }
         public void Task10(int[] array, int N)
         {
-
-            // code here
-
-            // end
-
+            if (N <= 0 || N >= array.Length) N = 1;
+            N--;
+            int[] rofl = new int[N];
+            for (int i = N - 1, j = 0; i >= 0; i--, j++)
+            {
+                rofl[j] = array[i];
+            }
+            for (int i = N + 1, j = 0; i < array.Length && j < rofl.Length; i++, j++)
+            {
+                array[i] = rofl[j]; 
+            }
         }
         public (double[], double[]) Task11(double a, double b, int n)
         {
-            double[] X = null, Y = null;
+            if (a > b) return (null, null);
+            if (n < 3) return (new double[0], new double[0]); // это такой рофл
+            if (a == b) return (null, null);
+            double h = (b - a) / (n - 1);
+            double[] X = new double[n], Y = new double[n];
+            double[] Xtemp = new double[n], Ytemp = new double[n];
             double[] Xext = null, Yext = null;
 
-            // code here
-
-            // end
+            for (int i = 0; i < n; i++)
+            {
+                double xd = a + i * h;
+                X[i] = xd;
+                Y[i] = Math.Cos(xd) + xd * Math.Sin(xd);
+            }
+            int c = 0;
+            for (int i = 1; i < X.Length - 1; i++)
+            {                
+                if (Y[i - 1] < Y[i] && Y[i] > Y[i + 1] || Y[i - 1] > Y[i] && Y[i] < Y[i + 1])
+                {
+                    Ytemp[c] = Y[i];
+                    Xtemp[c] = X[i];
+                    c++;
+                }
+            }
+            Xext = new double[c];
+            Yext = new double[c];
+            for (int i = 0; i < c; i++) Xext[i] = Xtemp[i];
+            for (int i = 0; i < c; i++) Yext[i] = Ytemp[i];
 
             return (Xext, Yext);
         }
 
         public (double[] bright, double[] normal, double[] dim) Task12(double[] raw)
         {
-            double[] bright = null, normal = null, dim = null;
-
-            // code here
-
-            // end
-
+            double[] bright = null, normal = new double[raw.Length], dim = null;
+            int b = 0, d = 0;
+            double s = 0;
+            for (int i = 0; i < raw.Length; i++)
+            {
+                s += raw[i];
+            }
+            s /= raw.Length;
+            double[] xd = new double[raw.Length];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                if (raw[i] > 2 * s)
+                {
+                    xd[b] = raw[i];
+                    b++;
+                }
+            }
+            for (int i = 0; i < raw.Length; i++)
+            { 
+                if (raw[i] < s / 2)
+                {
+                    xd[b + d] = raw[i];
+                    d++;
+                }
+                if (raw[i] <= 2 * s && raw[i] >= s / 2) normal[i] = raw[i];
+            }
+            int[] bi = new int[b];
+            int[] di = new int[d];
+            for (int i = 0, bb = 0, dd = 0; i < raw.Length; i++)
+            {
+                if (raw[i] > 2 * s)
+                {
+                    bi[bb] = i;
+                    bb++;
+                }
+                if (raw[i] < s / 2)
+                {
+                    di[dd] = i;
+                    dd++;
+                }
+            }
+            bright = new double[b];
+            dim = new double[d];
+            for (int i = 0; i < b + d; i++)
+            {
+                if (i < b)
+                {
+                    bright[i] = xd[i];
+                }
+                else
+                {
+                    dim[i - b] = xd[i];
+                }
+            }
+            double sr = 0;
+            for (int i = 0; i < normal.Length; i++) sr += normal[i];
+            sr /= normal.Length - b - d;
+            for (int i = 0; i < b; i++)
+            {
+                normal[bi[i]] = (sr + bright[i]) / 2;
+            }
+            for (int i = 0; i < d; i++)
+            {
+                normal[di[i]] = (sr + dim[i]) / 2;
+            }
+            int n = normal.Length;
+            int j = 1;
+            while (j < n)
+            {
+                if (j == 0 || normal[j] <= normal[j - 1])
+                {
+                    j++;
+                }
+                else
+                {
+                    (normal[j], normal[j - 1]) = (normal[j - 1], normal[j]);
+                    j--;
+                }
+            }
             return (bright, normal, dim);
         }
     }
