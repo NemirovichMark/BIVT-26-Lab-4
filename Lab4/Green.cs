@@ -322,7 +322,7 @@
                     if (A[i] > 0)
                     {
                         s += A[i];
-                        count++;
+                        countp++;
                     }
                 }
                 double sr = s / countp;
