@@ -315,7 +315,7 @@
                 A = new double[n];
                 double step = (b - a) / (n - 1);
                 double s = 0;
-                double count = 0;
+                double countp = 0;
                 for (int i = 0;i < n;i++)
                 {
                     A[i] = a + i * step;
@@ -325,7 +325,7 @@
                         count++;
                     }
                 }
-                double sr = s / count;
+                double sr = s / countp;
                 int count = 0;
                 for (int i = 0;i < n;i++)
                 {
