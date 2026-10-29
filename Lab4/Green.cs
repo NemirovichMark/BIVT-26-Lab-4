@@ -94,7 +94,7 @@
                 }
             }
             int g = 0;
-            if (k != 0)
+            if (k != 0);
             {
                 negatives = new int[k];
                 for (int i = left + 1; i < right; i++)
@@ -149,36 +149,32 @@
         {
             int[] answer = null;
 
-            // code here
-        int max = array[0];
-        int c = 0;
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] > max)
+            // code here int max = array[0], count = 0;
+            int max = array[0], count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > max) 
                 {
                     max = array[i];
                 }
-        }
-
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] == max)
-            {
-                c++;
             }
-        }
-
-        int a = 0;
-        answer = new int[c];
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] == max)
+            for (int i = 0; i < array.Length; i++)
             {
-                answer[c] = i;
-                a++;
+                if (array[i] == max)
+                {
+                    count++;
+                }
             }
-        }
-        
+            answer = new int[count];
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == max) 
+                {
+                    answer[k] = i;
+                    k++;
+                }
+            }
             // end
 
             return answer;
