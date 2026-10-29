@@ -68,7 +68,7 @@
             int[] answer = null;
 
             // code here
-                if (array == null || array.Length == 0)
+            if (array == null || array.Length == 0)
             {
                 return new int[0];
             }
@@ -125,8 +125,10 @@
             {
                 return;
             }
+            
             int[] answer = new int[array.Length];
             int aI = 0;
+            
             for (int j = 0; j < array.Length; j++)
             {
                 if (array[j] >= 0)
@@ -135,7 +137,7 @@
                     aI++;
                 }
             }
-            aI = 0;
+            
             for (int k = 0; k < array.Length; k++)
             {
                 if (array[k] < 0)
@@ -144,6 +146,7 @@
                     aI++;
                 }
             }
+            
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = answer[i];
