@@ -475,7 +475,97 @@
             double[] bright = null, normal = null, dim = null;
 
             // code here
-
+            if (raw == null || raw.Length == 0)
+            {
+                return (new double[0], new double[0], new double[0]);
+            }
+            
+            int brCount = 0, diCount = 0, nCount = 0, rCount = 0;
+            double sum = 0;
+            for (int i = 0; i < raw.Length; i++)
+            {
+                sum += raw[i];
+            }
+            double mid = sum / raw.Length;
+            double hL = mid * 2;
+            double lL = mid / 2;
+            
+            double[] tempBr = new double[raw.Length];
+            double[] tempN = new double[raw.Length];
+            double[] tempDi = new double[raw.Length];
+            int[] normalIndices = new int[raw.Length];
+            double[] removedVals = new double[raw.Length];
+            
+            for (int i = 0; i < raw.Length; i++)
+            {
+                if (raw[i] > hL)
+                {
+                    tempBr[brCount++] = raw[i];
+                }
+                else if (raw[i] < lL)
+                {
+                        tempDi[diCount++] = raw[i];
+                }
+                else
+                {
+                    tempN[nCount++] = raw[i];
+                    normalIndices[rCount] = i;
+                    rCount++;
+                }
+            }
+            
+            double sum1 = 0;
+            for (int i = 0; i < nCount; i++)
+            {
+                sum1 += tempN[i];
+            }
+            double mid1 = (nCount > 0) ? (sum1 / nCount) : 0;
+            double[] finalN = new double[raw.Length];
+            int fNIndex = 0;
+            int nPtr = 0;
+            
+            for (int i = 0; i < raw.Length; i++)
+            {
+                if (nPtr < rCount && normalIndices[nPtr] == i)
+                {
+                    finalN[fNIndex++] = raw[i];
+                    nPtr++;
+                }
+                else
+                {
+                    finalN[fNIndex++] = (mid1 + raw[i]) / 2.0;
+                }
+            }
+            
+            normal = new double[fNIndex];
+            for (int i = 0; i < fNIndex; i++)
+            {
+                normal[i] = finalN[i];
+            }
+            
+            for (int i = 1; i < normal.Length; i++)
+            {
+                double key = normal[i];
+                int j = i - 1;
+                while (j >= 0 && normal[j] < key)
+                {
+                    normal[j + 1] = normal[j];
+                    j--;
+                }
+                normal[j + 1] = key;
+            }
+            
+            bright = new double[brCount];
+            for (int i = 0; i < brCount; i++)
+            {
+                bright[i] = tempBr[i];
+            }
+            
+            dim = new double[diCount];
+            for (int i = 0; i < diCount; i++)
+            {
+                dim[i] = tempDi[i];
+            }
             // end
 
             return (bright, normal, dim);
