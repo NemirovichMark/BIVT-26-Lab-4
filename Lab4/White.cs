@@ -299,7 +299,6 @@ return result;
         public double[] Task12(double[] raw)
         {
     
-
             // code here
     if (raw == null || raw.Length < 3) return null;
   double[] restored = (double[])raw.Clone();
@@ -316,11 +315,23 @@ return result;
 
     if (allDamaged) return restored;
 
-    for (int i = 1; i < raw.Length - 1; i++)
+   for (int i = 1; i < raw.Length - 1; i++)
     {
-        if (raw[i] == -1.0 && raw[i - 1] != -1.0 && raw[i + 1] != -1.0)
+        if (raw[i] == -1.0)
         {
-            restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
+            // 1. Find nearest valid neighbor to the left
+            int left = i - 1;
+            while (left >= 0 && raw[left] == -1.0) left--;
+
+            // 2. Find nearest valid neighbor to the right
+            int right = i + 1;
+            while (right < raw.Length && raw[right] == -1.0) right++;
+
+            // 3. If valid neighbors exist on both sides, calculate the average
+            if (left >= 0 && right < raw.Length)
+            {
+                restored[i] = (raw[left] + raw[right]) / 2.0;
+            }
         }
     }
     
