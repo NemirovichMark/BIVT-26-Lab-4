@@ -88,7 +88,22 @@ array[minIndex] = temp;
         {
 
             // code here
+    if (array.Length == 0)
+{
+    return;
+}
 
+int maxIndex = 0;
+
+for (int i = 2; i < array.Length; i += 2)
+{
+    if (array[i] > array[maxIndex])
+    {
+        maxIndex = i;
+    }
+}
+
+array[maxIndex] = maxIndex;
             // end
 
         }
@@ -97,7 +112,15 @@ array[minIndex] = temp;
             int index = 0;
 
             // code here
+            for (int i = 0; i < array.Length; i++)
+{
+    if (array[i] == P)
+    {
+        return i;
+    }
+}
 
+return -1;
             // end
 
             return index;
@@ -106,7 +129,27 @@ array[minIndex] = temp;
         {
 
             // code here
+    if (array.Length < 2)
+{
+    return;
+}
 
+int maxIndex = 0;
+
+for (int i = 1; i < array.Length; i++)
+{
+    if (array[i] > array[maxIndex])
+    {
+        maxIndex = i;
+    }
+}
+
+for (int i = 0; i + 1 < maxIndex; i += 2)
+{
+    int temp = array[i];
+    array[i] = array[i + 1];
+    array[i + 1] = temp;
+}
             // end
 
         }
@@ -115,7 +158,29 @@ array[minIndex] = temp;
             int[] answer = null;
 
             // code here
+        int count = 0;
 
+for (int i = 0; i < array.Length; i++)
+{
+    if (array[i] >= 0)
+    {
+        count++;
+    }
+}
+
+int[] result = new int[count];
+int j = 0;
+
+for (int i = 0; i < array.Length; i++)
+{
+    if (array[i] >= 0)
+    {
+        result[j] = array[i];
+        j++;
+    }
+}
+
+return result;
             // end
 
             return answer;
@@ -124,7 +189,22 @@ array[minIndex] = temp;
         {
 
             // code here
+        int[] result = (int[])array.Clone();
 
+for (int i = 0; i < result.Length - 1; i++)
+{
+    for (int j = i + 1; j < result.Length; j++)
+    {
+        if (result[i] < result[j])
+        {
+            int temp = result[i];
+            result[i] = result[j];
+            result[j] = temp;
+        }
+    }
+}
+
+return result;
             // end
 
         }
@@ -132,7 +212,7 @@ array[minIndex] = temp;
         {
 
             // code here
-
+    
             // end
 
         }
