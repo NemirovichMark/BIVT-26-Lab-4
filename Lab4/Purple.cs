@@ -166,23 +166,29 @@
             // code here
             if (A == null || B == null)
             {
-                return new int[0];
+                return null;
             }
             
-            if (k < 0) k = 0;
-            if (k > A.Length) k = A.Length;
+            if (k < 1 || k > A.Length)
+            {
+                return null;
+            }
+            
             answer = new int[A.Length + B.Length];
             int curI = 0;
+            
             for (int i = 0; i < k; i++)
             {
                 answer[curI] = A[i];
                 curI++;
             }
+            
             for (int i = 0; i < B.Length; i++)
             {
                 answer[curI] = B[i];
                 curI++;
             }
+            
             for (int i = k; i < A.Length; i++)
             {
                 answer[curI] = A[i];
