@@ -1,0 +1,12 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/Lab4/bin/Debug/net8.0
+/Lab4/obj/Debug/net8.0
+/Lab4/obj
+/Lab4test/bin/Debug/net8.0
+/Lab4test/obj/Debug/net8.0
+/Lab4test/obj
+/Lab4/.vs
+/Lab4test/BlueTest.cs
