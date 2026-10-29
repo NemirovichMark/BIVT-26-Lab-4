@@ -83,7 +83,7 @@
             int cI = 0;
             double cD = Math.Abs(array[0] - mid);
             
-            for (int j = 0; j < array.Length; j++)
+            for (int j = 1; j < array.Length; j++)
             {
                 if (Math.Abs(array[j] - mid) < cD)
                 {
@@ -112,6 +112,11 @@
                         answer[k + 1] = array[k];
                     }
                 }
+            }
+            
+            if (cI == array.Length - 1)
+            {
+                answer[array.Length] = P;
             }
             // end
 
