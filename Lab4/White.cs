@@ -301,7 +301,36 @@ return result;
             double[] restored = null;
 
             // code here
+        if (raw == null || raw.Length < 3)
+    {
+        return null;
+    }
 
+    int[] restored = (int[])raw.Clone();
+
+    bool allDamaged = true;
+    for (int i = 0; i < raw.Length; i++)
+    {
+        if (raw[i] != -1)
+        {
+            allDamaged = false;
+            break;
+        }
+    }
+
+    if (allDamaged)
+    
+        
+    
+    for (int i = 1; i < raw.Length - 1; i++)
+    {
+        if (raw[i] == -1 && raw[i - 1] != -1 && raw[i + 1] != -1)
+        {
+            restored[i] = (int)(((double)raw[i - 1] + raw[i + 1]) / 2.0);
+        }
+    }
+
+    return restored;
             // end
 
             return restored;
