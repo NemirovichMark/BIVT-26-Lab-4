@@ -68,18 +68,21 @@
             int[] answer = null;
 
             // code here
-            if (array == null || array.Length == 0)
+                if (array == null || array.Length == 0)
             {
-                return answer;
+                return new int[0];
             }
+            
             int sum = 0;
             for (int i = 0; i < array.Length; i++)
             {
                 sum += array[i];
             }
+            
             double mid = (double)sum / array.Length;
             int cI = 0;
             double cD = Math.Abs(array[0] - mid);
+            
             for (int j = 0; j < array.Length; j++)
             {
                 if (Math.Abs(array[j] - mid) < cD)
@@ -88,20 +91,26 @@
                     cI = j;
                 }
             }
-            answer = new int[array.Length+1];
+            
+            answer = new int[array.Length + 1];
+            
             for (int k = 0; k < array.Length; k++)
             {
                 if (k <= cI)
                 {
                     answer[k] = array[k];
                 }
-                else if (k == cI + 1)
-                {
-                    answer[k] = P;
-                }
                 else
                 {
-                    answer[k+1] = array[k]; 
+                    if (k == cI + 1)
+                    {
+                        answer[k] = P;
+                        answer[k + 1] = array[k];
+                    }
+                    else
+                    {
+                        answer[k + 1] = array[k];
+                    }
                 }
             }
             // end
