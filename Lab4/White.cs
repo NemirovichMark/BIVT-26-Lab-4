@@ -185,7 +185,7 @@ return result;
 
             return answer;
         }
-        public void Task8(int[] array)
+        public int[] Task8(int[] array)
         {
 
             // code here
@@ -208,7 +208,7 @@ return result;
             // end
 
         }
-        public void Task9(int[] array)
+        public int[] Task9(int[] array)
         {
 
             // code here
@@ -225,7 +225,7 @@ return result;
         }
         public int[] Task10(int[] A, int[] B)
         {
-            int[] C = null;
+            
 
             // code here
  int[] C = new int[A.Length + B.Length];
@@ -298,39 +298,32 @@ return result;
 
         public double[] Task12(double[] raw)
         {
-            double[] restored = null;
+    
 
             // code here
-        if (raw == null || raw.Length < 3)
-    {
-        return null;
-    }
-
-    int[] restored = (int[])raw.Clone();
-
+    if (raw == null || raw.Length < 3) return null;
+  double[] restored = (double[])raw.Clone();
+            
     bool allDamaged = true;
     for (int i = 0; i < raw.Length; i++)
     {
-        if (raw[i] != -1)
+        if (raw[i] != -1.0)
         {
             allDamaged = false;
             break;
         }
     }
 
-    if (allDamaged)
-    
-        
-    
+    if (allDamaged) return restored;
+
     for (int i = 1; i < raw.Length - 1; i++)
     {
-        if (raw[i] == -1 && raw[i - 1] != -1 && raw[i + 1] != -1)
+        if (raw[i] == -1.0 && raw[i - 1] != -1.0 && raw[i + 1] != -1.0)
         {
-            restored[i] = (int)(((double)raw[i - 1] + raw[i + 1]) / 2.0);
+            restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
         }
     }
-
-    return restored;
+    
             // end
 
             return restored;
