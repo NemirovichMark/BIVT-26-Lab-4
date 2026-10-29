@@ -423,49 +423,52 @@
             double[] Xext = null, Yext = null;
 
             // code here
-            if (n < 1 || b < a)
+            if (n < 1 || a != a || b != b) 
             {
                 return (new double[0], new double[0]);
             }
-            double step;
-            if (n == 1)
+        
+            if (a > b)
             {
-                step = 0;
+                double temp = a;
+                a = b;
+                b = temp;
             }
-            else
+        
+            double step = 0;
+            if (n > 1)
             {
                 step = (b - a) / (n - 1);
             }
-            
-            X  = new double[n];
+        
+            X = new double[n];
             Y = new double[n];
-            
+        
             for (int i = 0; i < n; i++)
             {
                 X[i] = a + i * step;
                 Y[i] = Math.Cos(X[i]) + X[i] * Math.Sin(X[i]);
             }
-            
+        
             double[] tempX = new double[n];
             double[] tempY = new double[n];
             int extC = 0;
-            
-            for (int i = 1; i < (n-1); i++)
+        
+            for (int i = 1; i < n - 1; i++)
             {
-                if ((Y[i] > Y[i-1] && Y[i] > Y[i+1]) || ((Y[i] < Y[i - 1] && Y[i] < Y[i + 1])))
+                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) || (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
                 {
                     tempX[extC] = X[i];
                     tempY[extC] = Y[i];
                     extC++;
                 }
             }
-            
+        
             if (extC > 0)
             {
                 Xext = new double[extC];
                 Yext = new double[extC];
-            
-                for (int i = 0; i < (extC); i++)
+                for (int i = 0; i < extC; i++)
                 {
                     Xext[i] = tempX[i];
                     Yext[i] = tempY[i];
