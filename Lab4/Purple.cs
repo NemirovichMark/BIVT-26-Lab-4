@@ -38,32 +38,26 @@
             // code here
             if (array == null)
             {
-                return (even, odd);
+                return (new int[0], new int[0]);
             }
-            int[] even1 = new int[(array.Length + 1) / 2];
-            int[] odd1 = new int[(array.Length / 2)];
+            
+            even = new int[(array.Length + 1) / 2];
+            odd = new int[array.Length / 2];
             int evenI = 0;
             int oddI = 0;
+            
             for (int i = 0; i < array.Length; i++)
             {
                 if (i % 2 == 0)
                 {
-                    even1[evenI] = array[i];
+                    even[evenI] = array[i];
                     evenI++;
                 }
                 else
                 {
-                    odd1[oddI] = array[i];
+                    odd[oddI] = array[i];
                     oddI++;
                 }
-            }
-            for (int i = 0; i < even1.Length; i++)
-            {
-                even[i] = even1[i];
-            }
-            for (int i = 0; i < odd1.Length; i++)
-            {
-                odd[i] = odd1[i];
             }
             // end
 
