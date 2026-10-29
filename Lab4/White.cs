@@ -269,7 +269,28 @@ return C;
             double[] array = null;
 
             // code here
+        if (n <= 0 || (a == b && n != 1))
+{
+    return null;
+}
 
+if (n == 1)
+{
+    return new double[] { a };
+}
+
+double[] result = new double[n];
+double step = (b - a) / (n - 1);
+
+for (int i = 0; i < n; i++)
+{
+    result[i] = a + step * i;
+}
+
+result[0] = a;
+result[n - 1] = b;
+
+return result;
             // end
 
             return array;
