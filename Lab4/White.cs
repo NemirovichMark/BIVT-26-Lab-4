@@ -212,7 +212,14 @@ return result;
         {
 
             // code here
-    
+             int[] result = new int[array.Length];
+
+for (int i = 0; i < array.Length; i++)
+{
+    result[i] = array[array.Length - 1 - i];
+}
+
+return result;
             // end
 
         }
@@ -221,7 +228,38 @@ return result;
             int[] C = null;
 
             // code here
+ int[] C = new int[A.Length + B.Length];
 
+int a = 0;
+int b = 0;
+int c = 0;
+
+while (a < A.Length && b < B.Length)
+{
+    C[c] = A[a];
+    c++;
+    a++;
+
+    C[c] = B[b];
+    c++;
+    b++;
+}
+
+while (a < A.Length)
+{
+    C[c] = A[a];
+    c++;
+    a++;
+}
+
+while (b < B.Length)
+{
+    C[c] = B[b];
+    c++;
+    b++;
+}
+
+return C;
             // end
 
             return C;
