@@ -160,13 +160,42 @@ namespace Lab4
             int[] C = null;
 
             // code here
-            if (A == null) A = new int[0];
-            if (B == null) B = new int[0]; 
+            if (A.Length == 0 && B.Length == 0)
+            {
+                C = new int[0];
+            }
+            else if (A.Length == 0)
+            {
+                C = new int[B.Length];
+                for (int i = 0; i < B.Length; i++)
+                    C[i] = B[i];
+            }
+            else if (B.Length == 0)
+            {
+                C = new int[A.Length];
+                for (int i = 0; i < A.Length; i++)
+                    C[i] = A[i];
+            }
+            else
+            {
+                C = new int[A.Length + B.Length];
+                int idxA = 0, idxB = 0;
 
-             C = new int[A.Length + B.Length];
+                for (int i = 0; i < C.Length; i++)
+                {
 
-            Array.Copy(A, 0, C, 0, A.Length);
-            Array.Copy(B, 0, C, A.Length, B.Length);
+                    if (idxA < A.Length && (i % 2 == 0 || idxB >= B.Length))
+                    {
+                        C[i] = A[idxA];
+                        idxA++;
+                    }
+                    else
+                    {
+                        C[i] = B[idxB];
+                        idxB++;
+                    }
+                }
+            }
 
             // end
 
@@ -177,25 +206,18 @@ namespace Lab4
             double[] array = null;
 
             // code here
-            if (a > b)
+            if (a == b && n == 1)
+                array = new double[] { a };
+            else if (a != b && n > 1)
             {
-                double temp = a;
-                a = b;
-                b = temp;
+                array = new double[n];
+                double step = (b - a) / (n - 1);
+                for (int i = 0; i < n; i++)
+                    array[i] = a + i * step;
             }
+            else
+                array = null;
 
-            if (a == b)
-            {
-                return new double[] { a };
-            }
-
-            array = new double[n];
-            
-
-            for (int i = 0; i < n; i++)
-            {
-                array[i] = a+(b-a);
-            }
 
             // end
 
@@ -207,34 +229,76 @@ namespace Lab4
             double[] restored = null;
 
             // code here
-            int dc = 0;
-            int nc = 0;
-            double s = 0;
-            for (int i=0; i<raw.Length; i++)
+            
+            if (raw.Length < 3)
             {
-                if (raw[i]==-1)
+                restored = null;
+            }
+            else
+            {
+                bool allminusone = true;
+                for (int i = 0; i < raw.Length; i++)
                 {
-                    dc++;
+                    if (raw[i] != -1)
+                    {
+                        allminusone = false;
+                        break;
+                    }
                 }
+                
+                restored = new double[raw.Length];
+                int n = raw.Length;
+                
+                if (allminusone)
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        restored[i] = raw[i];
+                    }
+                }
+                
                 else
                 {
-                    s += raw[i];
-                    nc++;
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (raw[i] == -1)
+                        {
+                            int leftIx;
+                            if (i == 0)
+                            {
+                                leftIx = n - 1;
+                            }
+                            else
+                            {
+                                leftIx = i - 1;
+                            }
+                            int rightIx;
+                            if (i == n - 1)
+                            {
+                                rightIx = 0;
+                            }
+                            else
+                            {
+                                rightIx = i + 1;
+                            }
+                            if (raw[leftIx] != -1 && raw[rightIx] != -1)
+                            {
+                                restored[i] = (raw[leftIx] + raw[rightIx]) / 2.0;
+                            }
+                            else
+                            {
+                                restored[i] = -1;
+                            }
+                        }
+                        else
+                        {
+                            restored[i] = raw[i];
+                        }
+                    }
+
                 }
             }
-            if (dc<3)
-            {
-                return null;
-            }
-            double a = s / nc;
-            double[] r = (double[])raw.Clone();
-            for (int i =1; i<r.Length; i++)
-            {
-                if (r[i]==-1)
-                {
-                    r[i] = a;
-                }
-            }
+
 
             // end
 
