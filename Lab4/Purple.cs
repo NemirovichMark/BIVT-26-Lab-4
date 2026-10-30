@@ -1,4 +1,4 @@
-﻿namespace Lab4
+namespace Lab4
 {
     public class Purple
     {
@@ -169,9 +169,14 @@
                 return null;
             }
             
-            if (k < 1 || k > A.Length)
+            if (k < 0 || k > A.Length)
             {
-                return null;
+                answer = new int[A.Length];
+                for (int i = 0; i < A.Length; i++)
+                {
+                    answer[i] = A[i];
+                }
+                return answer;
             }
             
             answer = new int[A.Length + B.Length];
@@ -205,12 +210,7 @@
             // code here
             if (A == null || B == null || A.Length != B.Length)
             {
-                return (new int[0], new int[0]);
-            }
-        
-            if (A.Length == 0)
-            {
-                return (new int[0], new int[0]);
+                return (null, null);
             }
             
             int l = A.Length;
@@ -429,16 +429,9 @@
             double[] Xext = null, Yext = null;
 
             // code here
-            if (n < 1 || a != a || b != b) 
+            if (n < 1 || a > b || (a == b && n != 1))
             {
-                return (new double[0], new double[0]);
-            }
-        
-            if (a > b)
-            {
-                double temp = a;
-                a = b;
-                b = temp;
+                return (null, null);
             }
         
             double step = 0;
