@@ -306,16 +306,18 @@ namespace Lab4
         {
             // code here
             if (array == null || array.Length == 0) return;
+            
+            int nIndex = N;
+            if (nIndex >= array.Length) nIndex = array.Length - 1;
+            if (nIndex < 0) nIndex = 0;
 
-            int nIndex = N < array.Length ? N : array.Length - 1;
-            int leftCount = nIndex; 
+            int leftCount = nIndex;
             int rightCount = array.Length - 1 - nIndex;
             int count = Math.Min(leftCount, rightCount);
 
             for (int i = 1; i <= count; i++)
             {
-                int leftVal = array[nIndex - i];
-                array[nIndex + i] = leftVal;
+                array[nIndex + i] = array[nIndex - i];
             }
             // end
         }
@@ -421,25 +423,34 @@ namespace Lab4
                     normalSum += normalTemp[i];
                 }
                 double normalAvg = normalTemp.Length > 0 ? normalSum / normalTemp.Length : 0;
-
+                
                 normal = new double[raw.Length];
+                int finalNormalIdx = 0;
+
+                double[] tempFinalNormal = new double[raw.Length];
+
                 for (int i = 0; i < raw.Length; i++)
                 {
                     if (raw[i] > upperLimit)
                     {
-                        normal[i] = (normalAvg + raw[i]) / 2.0;
+                        tempFinalNormal[finalNormalIdx++] = (normalAvg + raw[i]) / 2.0;
                     }
                     else if (raw[i] < lowerLimit)
                     {
-                        normal[i] = (normalAvg + raw[i]) / 2.0;
+                        tempFinalNormal[finalNormalIdx++] = (normalAvg + raw[i]) / 2.0;
                     }
                     else
                     {
-                        normal[i] = raw[i];
+                        tempFinalNormal[finalNormalIdx++] = raw[i];
                     }
                 }
+                
+                Array.Sort(tempFinalNormal, 0, finalNormalIdx, Comparer<double>.Create((x, y) => y.CompareTo(x)));
 
-                Array.Sort(normal, (x, y) => y.CompareTo(x));
+                for (int i = 0; i < finalNormalIdx; i++)
+                {
+                    normal[i] = tempFinalNormal[i];
+                }
             }
             // end
 
