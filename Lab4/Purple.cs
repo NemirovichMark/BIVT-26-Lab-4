@@ -307,7 +307,7 @@ namespace Lab4
             int minKolvo = Math.Min(N - 1, array.Length - N);
             for (int i = 0; i < minKolvo; i++)
             {
-                array[N + i] = array[N-2-i];
+                array[N + i] = array[N-2- i];
             }
             // end
 
@@ -318,7 +318,44 @@ namespace Lab4
             double[] Xext = null, Yext = null;
 
             // code here
+            if ((a == b && n > 1) || a > b)
+            {
+                return (Xext, Yext);
+            }
+            X = new double[n];
+            Y = new double[n];
+            double xSchet = Math.Min(a, b);
+            double shag = (b - a) / (n - 1);
 
+            for (int i = 0; i < n; i++)
+            {
+                X[i] = xSchet;
+                Y[i] = Math.Cos(xSchet) + xSchet * Math.Sin(xSchet);
+                xSchet += shag;
+            }
+            int[] ext = new int[n];
+            int cnt = 0;
+
+            for (int i = 1; i < n - 1; i++)
+            {
+                bool isMaximum = Y[i] > Y[i - 1] && Y[i] > Y[i + 1];
+                bool isMinimum = Y[i] < Y[i - 1] && Y[i] < Y[i + 1];
+
+                if (isMaximum || isMinimum)
+                {
+                    ext[cnt] = i;
+                    cnt++;
+                }
+            }
+            Xext = new double[cnt];
+            Yext = new double[cnt];
+
+            for (int j = 0; j < cnt; j++)
+            {
+                int targetIndex = ext[j];
+                Xext[j] = X[targetIndex];
+                Yext[j] = Y[targetIndex];
+            }
             // end
 
             return (Xext, Yext);
@@ -329,10 +366,80 @@ namespace Lab4
             double[] bright = null, normal = null, dim = null;
 
             // code here
+            double sum = 0, avg, favg;
+            for (int i = 0; i < raw.Length; i++)
+            {
+                sum += raw[i];
+            }
+            favg = sum / raw.Length;
 
-            // end
+            sum = 0;
+            int bcnt = 0, ncnt = 0, dcnt = 0;
 
+            int[] status = new int[raw.Length];
+
+            for (int i = 0; i < raw.Length; i++)
+            {
+                double s = raw[i];
+                if (s > 2 * favg)
+                {
+                    bcnt++;
+                    status[i] = 1;
+                }
+                else if (s < favg / 2)
+                {
+                    dcnt++;
+                    status[i] = 2;
+                }
+                else
+                {
+                    ncnt++;
+                    sum += s;
+                    status[i] = 0;
+                }
+            }
+            avg = ncnt > 0 ? sum / ncnt : 0;
+            bright = new double[bcnt];
+            dim = new double[dcnt];
+            normal = new double[raw.Length];
+
+            int bidx = 0, didx = 0;
+            for (int i = 0; i < raw.Length; i++)
+            {
+                double s = raw[i];
+
+                if (status[i] == 1)
+                {
+                    bright[bidx] = s;
+                    bidx++;
+                    s = (s + avg) / 2;
+                }
+                else if (status[i] == 2)
+                {
+                    dim[didx] = s;
+                    didx++;
+                    s = (s + avg) / 2;
+                }
+
+                normal[i] = s;
+            }
+
+            for (int gap = normal.Length / 2; gap > 0; gap /= 2)
+            {
+                for (int i = gap; i < normal.Length; i++)
+                {
+                    double key = normal[i];
+                    int j;
+                    for (j = i; j >= gap && normal[j - gap] < key; j -= gap)
+                    {
+                        normal[j] = normal[j - gap];
+                    }
+                    normal[j] = key;
+                }
+            }
             return (bright, normal, dim);
+            // end
         }
+
     }
 }
