@@ -124,7 +124,14 @@ namespace Lab4
                 return answer;
 
             if (k < 0 || k > A.Length)
+            {
+                answer = new int[A.Length];
+
+                for (int i = 0; i < A.Length; i++)
+                    answer[i] = A[i];
+
                 return answer;
+            }
 
             answer = new int[A.Length + B.Length];
 
