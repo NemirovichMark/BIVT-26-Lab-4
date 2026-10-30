@@ -124,7 +124,7 @@ namespace Lab4
                 return answer;
 
             if (k < 0 || k > A.Length)
-                return answer;
+                return A;
 
             answer = new int[A.Length + B.Length];
 
