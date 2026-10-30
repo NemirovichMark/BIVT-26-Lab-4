@@ -231,7 +231,25 @@ namespace Lab4
             int length = 0;
 
             // code here
-
+             int pd = 1;
+            length = 1;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    pd++;
+                    
+                }
+                else
+                {
+                    pd = 1;
+                }
+                if (pd > length)
+                {
+                    length = pd;
+                }
+            } 
+            
             // end
 
             return length;
@@ -241,6 +259,21 @@ namespace Lab4
 
             // code here
 
+            for (int i = 0; i < array.Length; i+= 2)
+            {
+                int minIndex = i;
+                for (int j = i + 2; j < array.Length; j+= 2)
+                {
+                    if (array[j] < array[minIndex])
+                    {
+                        minIndex = j;
+                    }
+                }
+                int temp = array[i];
+                array[i] = array[minIndex];
+                array[minIndex] = temp;
+
+            }
             // end
 
         }
@@ -249,8 +282,46 @@ namespace Lab4
             int[] cleared = null;
 
             // code here
+            
+                        int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                bool seen = false;
+                for (int j = 0; j < i; j++)
+                {
+                    if (array[j] == array[i])
+                    {
+                        seen = true;
+                    }
+                }
 
-            // end
+                if (!seen)
+                {
+                    count++;
+                }
+            }
+
+            cleared = new int[count];
+
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                bool seen = false;
+                for (int j = 0; j < i; j++)
+                {
+                    if (array[j] == array[i])
+                    {
+                        seen = true;
+                    }
+                }
+
+                if (!seen)
+                {
+                   cleared[k] = array[i];
+                    k++;
+                }
+            }
+                       // end
 
             return cleared;
         }
@@ -259,7 +330,52 @@ namespace Lab4
             double[] A = null, B = null;
 
             // code here
+            if (n > 1 && a != b)
+            {
+                A = new double[n];
+                for (int i = 0; i < n; i++)
+                {
+                    A[i] = a + i * (b - a) / (n - 1);
+                }
 
+                double sum = 0;
+                int positiveCount = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    if (A[i] > 0)
+                    {
+                        sum += A[i];
+                        positiveCount++;
+                    }
+                }
+
+                B = new double[0];
+
+                if (positiveCount > 0)
+                {
+                    double average = sum / positiveCount;
+
+                    int countB = 0;
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (A[i] > 0 && A[i] > average)
+                        {
+                            countB++;
+                        }
+                    }
+
+                    B = new double[countB];
+                    int k = 0;
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (A[i] > 0 && A[i] > average)
+                        {
+                            B[k] = A[i];
+                            k++;
+                        }
+                    }
+                }
+            }
             // end
 
             return B;
@@ -269,6 +385,32 @@ namespace Lab4
             int wins = 0;
 
             // code here
+            int sixes = 0;    
+
+            for (int i = 0; i < dices.Length; i++)
+            {
+                int player = dices[i] - sixes;
+                if (player < 1)
+                {
+                    player = 1;
+                }
+
+                int cheater = 6 - i;
+                if (cheater < 1)
+                {
+                    cheater = 1;
+                }
+
+                if (player > cheater)
+                {
+                    wins++;
+                }
+
+                if (dices[i] == 6)
+                {
+                    sixes++;
+                }
+            }
 
             // end
 
