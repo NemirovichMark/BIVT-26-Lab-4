@@ -133,7 +133,7 @@ namespace Lab4
 
             // code here
             if (A == null || B == null) return answer;
-            if (k < 1 || k > A.Length) return answer;
+            if (k < 0 || k > A.Length) return answer;
 
             answer = new int[A.Length + B.Length];
             int pos = 0;
@@ -312,7 +312,7 @@ namespace Lab4
             double[] Xext = null, Yext = null;
 
             // code here
-            if (n <= 0) return (null, null);
+            if (n <= 3) return (null, null);
 
             if (n < 3)
                 return (new double[0], new double[0]);
