@@ -32,11 +32,16 @@ namespace Lab4
         public int Task2(int[] array)
         {
             int sum = 0;
-            // code here
+            // code here limitIndex = -1;
+            int
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] < 0)
                     break;
+            }
+        }
+        for (int i = 0; i <limitIndex; i++)
+        {
                 sum += array[i] * array[i];
             }
             // end
@@ -66,8 +71,7 @@ namespace Lab4
             int count = 0;
             for (int i = start + 1; i < end; i++)
             {
-                if (array[i] < 0)
-                    count++;
+                if (array[i] < 0) count++:
             }
 
             if (count > 0)
@@ -186,14 +190,12 @@ namespace Lab4
         public void Task7(int[] array)
         {
             // code here
-            if (array == null || array.Length == 0)
-                return;
+            if (array == null || array.Length == 0) return;
 
             int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > maxVal)
-                    maxVal = array[i];
+                if (array[i] > maxVal)  maxVal = array[i];
             }
 
             int runningSum = 0;
@@ -202,12 +204,8 @@ namespace Lab4
                 if (array[i] == maxVal)
                 {
                     array[i] = runningSum;
-                    runningSum = runningSum + array[i];
                 }
-                else
-                {
-                    runningSum = runningSum + array[i];
-                }
+                prefixSum += array[i];
             }
             // end
         }
