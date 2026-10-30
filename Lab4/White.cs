@@ -219,7 +219,7 @@ namespace Lab4
                 result[i] = a + step * i;
             }
 
-            result = a;
+            result [0] = a;
             result[n - 1] = b;
 
             return result;
