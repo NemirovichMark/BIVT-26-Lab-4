@@ -7,8 +7,7 @@ namespace Lab4
         public void Task1(int[] array)
         {
 
-            // code here
-
+            // апрпрп
             // end
 
         }
