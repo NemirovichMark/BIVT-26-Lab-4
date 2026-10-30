@@ -385,6 +385,8 @@ raw[rightIndex]) / 2.0;
 // 6. Return the successfully restored array output
 return restored;
 }
+    }
+ }
             // end
 
             return restored;
