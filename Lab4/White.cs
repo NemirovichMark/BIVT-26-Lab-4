@@ -7,7 +7,13 @@
             double length = 0;
 
             // code here
-
+            double sum = 0;
+            for (int i = 0; i < vector.Length; i++)
+            {
+                double x = vector[i];
+                sum += x * x;
+            }
+            length = System.Math.Sqrt(sum);
             // end
 
             return length;
@@ -17,7 +23,14 @@
             int count = 0;
 
             // code here
-
+            for (int i = 0; i < array.Length; i++)
+            {
+                if ((array[i] > P && array[i] < Q) ||
+                    (array[i] > Q && array[i] < P))
+                {
+                    count++;
+                }
+            }
             // end
 
             return count;
@@ -26,7 +39,40 @@
         {
 
             // code here
+            int maxIndex = 0;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex])
+                {
+                    maxIndex = i;
+                }
+            }
 
+            bool allEqual = true;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] != array[0])
+                {
+                    allEqual = false;
+                    break;
+                }
+            }
+
+            if (!allEqual && maxIndex < array.Length - 1)
+            {
+                int minIndex = maxIndex + 1;
+                for (int i = maxIndex + 2; i < array.Length; i++)
+                {
+                    if (array[i] < array[minIndex])
+                    {
+                        minIndex = i;
+                    }
+                }
+
+                int temp = array[maxIndex];
+                array[maxIndex] = array[minIndex];
+                array[minIndex] = temp;
+            }
             // end
 
         }
@@ -34,7 +80,16 @@
         {
 
             // code here
+            int maxEvenIndex = 0;
+            for (int i = 2; i < array.Length; i += 2)
+            {
+                if (array[i] > array[maxEvenIndex])
+                {
+                    maxEvenIndex = i;
+                }
+            }
 
+            array[maxEvenIndex] = maxEvenIndex;
             // end
 
         }
@@ -43,7 +98,15 @@
             int index = 0;
 
             // code here
-
+            index = -1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == P)
+                {
+                    index = i;
+                    break;
+                }
+            }
             // end
 
             return index;
@@ -52,7 +115,21 @@
         {
 
             // code here
+            int maxIndex = 0;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex])
+                {
+                    maxIndex = i;
+                }
+            }
 
+            for (int i = 0; i + 1 < maxIndex; i += 2)
+            {
+                int temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
             // end
 
         }
@@ -61,7 +138,25 @@
             int[] answer = null;
 
             // code here
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    count++;
+                }
+            }
 
+            answer = new int[count];
+            int j = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    answer[j] = array[i];
+                    j++;
+                }
+            }
             // end
 
             return answer;
@@ -70,7 +165,19 @@
         {
 
             // code here
+            for (int i = 1; i < array.Length; i++)
+            {
+                int current = array[i];
+                int j = i - 1;
 
+                while (j >= 0 && array[j] < current)
+                {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+
+                array[j + 1] = current;
+            }
             // end
 
         }
@@ -78,7 +185,12 @@
         {
 
             // code here
-
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                int temp = array[i];
+                array[i] = array[array.Length - 1 - i];
+                array[array.Length - 1 - i] = temp;
+            }
             // end
 
         }
@@ -87,7 +199,35 @@
             int[] C = null;
 
             // code here
+            C = new int[A.Length + B.Length];
+            int i = 0;
+            int j = 0;
+            int k = 0;
 
+            while (i < A.Length && j < B.Length)
+            {
+                C[k] = A[i];
+                i++;
+                k++;
+
+                C[k] = B[j];
+                j++;
+                k++;
+            }
+
+            while (i < A.Length)
+            {
+                C[k] = A[i];
+                i++;
+                k++;
+            }
+
+            while (j < B.Length)
+            {
+                C[k] = B[j];
+                j++;
+                k++;
+            }
             // end
 
             return C;
@@ -97,7 +237,23 @@
             double[] array = null;
 
             // code here
+            if (n == 1 && a == b)
+            {
+                array = new double[1];
+                array[0] = a;
+            }
+            else if (n >= 2 && a != b)
+            {
+                array = new double[n];
+                double step = (b - a) / (n - 1);
 
+                for (int i = 0; i < n; i++)
+                {
+                    array[i] = a + step * i;
+                }
+
+                array[n - 1] = b;
+            }
             // end
 
             return array;
@@ -108,7 +264,41 @@
             double[] restored = null;
 
             // code here
+            if (raw.Length < 3)
+            {
+                return null;
+            }
 
+            restored = new double[raw.Length];
+            bool allDamaged = true;
+
+            for (int i = 0; i < raw.Length; i++)
+            {
+                restored[i] = raw[i];
+
+                if (raw[i] != -1)
+                {
+                    allDamaged = false;
+                }
+            }
+
+            if (!allDamaged)
+            {
+                for (int i = 0; i < raw.Length; i++)
+                {
+                    if (raw[i] == -1)
+                    {
+                        int left = (i - 1 + raw.Length) % raw.Length;
+                        int right = (i + 1) % raw.Length;
+
+                        if (raw[left] != -1 && raw[right] != -1)
+                        {
+                            restored[i] =
+                                (raw[left] + raw[right]) / 2.0;
+                        }
+                    }
+                }
+            }
             // end
 
             return restored;
