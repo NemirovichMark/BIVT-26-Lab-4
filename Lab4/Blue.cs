@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Lab4
 {
@@ -7,14 +7,14 @@ namespace Lab4
         public void Task1(int[] array)
         {
 
-                        int maxx = -9999999;
+            int maxx = -9999999;
             int s = 0;
             int ind = 1000000;
-            int m = 0;
+            int m = -1;
 
             for (int i = 0; i < array.Length; i++)
             {
-                if ((m == 0) && (array[i] < 0))
+                if ((m == -1) && (array[i] < 0))
                 {
                     m = i;
                 }
@@ -31,7 +31,7 @@ namespace Lab4
                     s = 0;
                 }
 
-                if (i+1 == array.Length)
+                if ((i+1 == array.Length) && (m != -1))
                 {
                     array[m] = s;
                 }
@@ -43,9 +43,33 @@ namespace Lab4
         {
             int[] answer = null;
 
-            // code here
+            int ind = -1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > 0) ind = i;
+            }
 
-            // end
+            if (ind == -1)
+            {
+                answer = new int[array.Length];
+                for (int i = 0; i < array.Length; i++)
+                    answer[i] = array[i];
+            }
+            else
+            {
+                answer = new int[array.Length + 1];
+                int j = 0;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    answer[j] = array[i];
+                    j++;
+                    if (i == ind)
+                    {
+                        answer[j] = P;
+                        j++;
+                    }
+                }
+            }
 
             return answer;
         }
@@ -53,27 +77,63 @@ namespace Lab4
         {
             int[] answer = null;
 
-            // code here
+            int minn = 9999999;
+            int ind = -1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > 0 && array[i] < minn)
+                {
+                    minn = array[i];
+                    ind = i;
+                }
+            }
 
-            // end
+            if (ind == -1)
+            {
+                answer = new int[array.Length];
+                for (int i = 0; i < array.Length; i++)
+                    answer[i] = array[i];
+            }
+            else
+            {
+                answer = new int[array.Length - 1];
+                int j = 0;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (i != ind)
+                    {
+                        answer[j] = array[i];
+                        j++;
+                    }
+                }
+            }
 
             return answer;
         }
         public void Task4(double[] array)
         {
 
-            // code here
+            double s = 0;
+            for (int i = 0; i < array.Length; i++)
+                s += array[i];
 
-            // end
+            s = s / array.Length;
+
+            for (int i = 0; i < array.Length; i++)
+                array[i] = array[i] - s;
 
         }
         public int Task5(int[] A, int[] B)
         {
             int sum = 0;
 
-            // code here
-
-            // end
+            if (A.Length == B.Length)
+            {
+                for (int i = 0; i < A.Length; i++)
+                {
+                    sum += A[i] * B[i];
+                }
+            }
 
             return sum;
         }
@@ -81,9 +141,29 @@ namespace Lab4
         {
             int[] indexes = null;
 
-            // code here
+            double s = 0;
+            for (int i = 0; i < array.Length; i++)
+                s += array[i];
 
-            // end
+            s = s / array.Length;
+            int c = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < s) c++;
+            }
+
+            indexes = new int[c];
+            int j = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < s)
+                {
+                    indexes[j] = i;
+                    j++;
+                }
+            }
 
             return indexes;
         }
@@ -91,9 +171,23 @@ namespace Lab4
         {
             int count = 0;
 
-            // code here
+            int maxx = 1;
+            int c1 = 1;
+            int c2 = 1;
 
-            // end
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] >= array[i - 1]) c1++;
+                else c1 = 1;
+
+                if (array[i] <= array[i - 1]) c2++;
+                else c2 = 1;
+
+                if (c1 > maxx) maxx = c1;
+                if (c2 > maxx) maxx = c2;
+            }
+
+            count = maxx;
 
             return count;
         }
@@ -101,9 +195,16 @@ namespace Lab4
         {
             int[] answer = null;
 
-            // code here
+            answer = new int[array.Length * 2];
+            int j = 0;
 
-            // end
+            for (int i = 0; i < array.Length; i++)
+            {
+                answer[j] = array[i];
+                j++;
+                answer[j] = array[i];
+                j++;
+            }
 
             return answer;
         }
@@ -111,9 +212,27 @@ namespace Lab4
         {
             double[] normalized = null;
 
-            // code here
+            int minn = array[0];
+            int maxx = array[0];
 
-            // end
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] < minn) minn = array[i];
+                if (array[i] > maxx) maxx = array[i];
+            }
+
+            if (minn == maxx)
+            {
+                normalized = null;
+            }
+            else
+            {
+                normalized = new double[array.Length];
+                for (int i = 0; i < array.Length; i++)
+                {
+                    normalized[i] = (double)(array[i] - minn) / (maxx - minn);
+                }
+            }
 
             return normalized;
         }
@@ -121,9 +240,40 @@ namespace Lab4
         {
             int index = 0;
 
-            // code here
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                for (int j = 0; j < array.Length - 1 - i; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+                }
+            }
 
-            // end
+            index = -1;
+            int l = 0;
+            int r = array.Length - 1;
+
+            while (l <= r)
+            {
+                int mid = (l + r) / 2;
+                if (array[mid] == P)
+                {
+                    index = mid;
+                    break;
+                }
+                else if (array[mid] < P)
+                {
+                    l = mid + 1;
+                }
+                else
+                {
+                    r = mid - 1;
+                }
+            }
 
             return index;
         }
@@ -131,9 +281,32 @@ namespace Lab4
         {
             int[] array = null;
 
-            // code here
+            bool stop = false;
+            int m = a;
+            int count = 0;
 
-            // end
+            if (b < 0)
+            {
+                stop = true;
+            }
+
+            if (a > c && !stop)
+            {
+                array = new int[0];
+                stop = true;
+            }
+
+            if (!stop)
+            {
+                int k = (c - a) / b + 1;
+                array = new int[k];
+                while (m <= c)
+                {
+                    array[count] = m;
+                    count++;
+                    m += b;
+                }
+            }
 
             return array;
         }
@@ -142,9 +315,29 @@ namespace Lab4
         {
             int[] indexes = null;
 
-            // code here
+            if (magazine.Length <= 3)
+            {
+                indexes = new int[magazine.Length];
+                for (int i = 0; i < magazine.Length; i++)
+                    indexes[i] = i;
+            }
+            else
+            {
+                int maxx = 0;
+                int ind = 0;
 
-            // end
+                for (int i = 0; i <= magazine.Length - 3; i++)
+                {
+                    int s = magazine[i] + magazine[i + 1] + magazine[i + 2];
+                    if (s > maxx)
+                    {
+                        maxx = s;
+                        ind = i;
+                    }
+                }
+
+                indexes = new int[] { ind, ind + 1, ind + 2 };
+            }
 
             return indexes;
         }
