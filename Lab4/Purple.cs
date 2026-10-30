@@ -129,35 +129,39 @@ namespace Lab4
             // end
 
         }
+        
         public int[] Task5(int[] A, int[] B, int k)
         {
             int[] answer = null;
-
-           // code here
+        
+            // code here
             if (A == null || B == null) return null;
-            if (k < 0 || k > A.Length) return null;
-            
+        
+            if (k < 0) k = 0;
+            if (k > A.Length) k = A.Length;
+        
             answer = new int[A.Length + B.Length];
             int index = 0;
-            
+        
             for (int i = 0; i < k; i++)
             {
                 answer[index++] = A[i];
             }
-            
+        
             for (int i = 0; i < B.Length; i++)
             {
                 answer[index++] = B[i];
             }
-            
+        
             for (int i = k; i < A.Length; i++)
             {
                 answer[index++] = A[i];
             }
             // end
-
+        
             return answer;
         }
+        
         public (int[] sum, int[] dif) Task6(int[] A, int[] B)
         {
             int[] sum = null, dif = null;
@@ -319,27 +323,23 @@ namespace Lab4
         {
             double[] X = null, Y = null;
             double[] Xext = null, Yext = null;
-
+        
             // code here
             if (n <= 0) return (null, null);
-            
-            Xext = new double[0];
-            Yext = new double[0];
-            
-            if (n < 3 || a == b) return (Xext, Yext);
-            
+            if (n == 1) return (null, null);
+            if (a > b) return (null, null);
+        
             X = new double[n];
             Y = new double[n];
             double step = (b - a) / (n - 1);
-            
+        
             for (int i = 0; i < n; i++)
             {
                 X[i] = a + i * step;
                 Y[i] = Math.Cos(X[i]) + X[i] * Math.Sin(X[i]);
             }
-            
+        
             int extCount = 0;
-            
             for (int i = 1; i < n - 1; i++)
             {
                 if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) ||
@@ -348,11 +348,11 @@ namespace Lab4
                     extCount++;
                 }
             }
-            
+        
             Xext = new double[extCount];
             Yext = new double[extCount];
             int idx = 0;
-            
+        
             for (int i = 1; i < n - 1; i++)
             {
                 if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) ||
@@ -364,7 +364,7 @@ namespace Lab4
                 }
             }
             // end
-
+        
             return (Xext, Yext);
         }
 
