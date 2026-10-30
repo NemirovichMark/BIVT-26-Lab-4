@@ -137,8 +137,12 @@ namespace Lab4
             // code here
             if (A == null || B == null) return null;
             
-            if (k < 0) k = 0;
-            if (k > A.Length) k = A.Length;
+            if (k < 0 || k > A.Length)
+            {
+                int[] copy = new int[A.Length];
+                for (int i = 0; i < A.Length; i++) copy[i] = A[i];
+                return copy;
+            }
             
             answer = new int[A.Length + B.Length];
             int index = 0;
@@ -326,13 +330,14 @@ namespace Lab4
         
             // code here
 
+            if (a > b || n < 1) return (null, null);
+
             if (a == b)
             {
                 if (n == 1) return (new double[0], new double[0]);
                 return (null, null);
             }
             
-
             if (n <= 1) return (null, null);
             
             X = new double[n];
