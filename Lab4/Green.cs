@@ -368,6 +368,8 @@
 
             if (positive == 0)
                 return B;
+            
+            
 
             double avg = sum / positive;
             int size = 0;
