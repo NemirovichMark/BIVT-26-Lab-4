@@ -147,12 +147,12 @@ namespace Lab4
             {
                 answer[index++] = A[i];
             }
-            
+
             for (int i = 0; i < B.Length; i++)
             {
                 answer[index++] = B[i];
             }
-            
+
             for (int i = k; i < A.Length; i++)
             {
                 answer[index++] = A[i];
@@ -325,11 +325,13 @@ namespace Lab4
             double[] Xext = null, Yext = null;
         
             // code here
+
             if (a == b)
             {
                 if (n == 1) return (new double[0], new double[0]);
                 return (null, null);
             }
+            
 
             if (n <= 1) return (null, null);
             
