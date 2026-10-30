@@ -506,7 +506,7 @@
             }
         }
         [TestMethod]
-        public void Test11()
+       public void Test11()
         {
             // Arrange
             var inputA = new int[] {  1,  2,  3, 1, 5, -6,   7,   8,   9, -10,   -5,   3,   1,  -1,    1 };
@@ -551,7 +551,7 @@
             }
         }
         [TestMethod]
-        public void Test12()
+        public void Test12() 
         {
             // Arrange
             var input = new int[][] {
