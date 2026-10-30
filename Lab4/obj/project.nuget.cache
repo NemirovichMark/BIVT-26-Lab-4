@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "JVFrKZXxfdA=",
+  "success": true,
+  "projectFilePath": "/Users/olesia/RiderProjects/BIVT-26-Lab-4/Lab4/Lab4.csproj",
+  "expectedPackageFiles": [
+    "/Users/olesia/.nuget/packages/microsoft.netcore.app.ref/8.0.31/microsoft.netcore.app.ref.8.0.31.nupkg.sha512",
+    "/Users/olesia/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.31/microsoft.aspnetcore.app.ref.8.0.31.nupkg.sha512",
+    "/Users/olesia/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.31/microsoft.netcore.app.host.osx-arm64.8.0.31.nupkg.sha512"
+  ],
+  "logs": []
+}
