@@ -225,16 +225,22 @@ namespace Lab4
 
             // code here
             if (raw == null || raw.Length < 3) return null;
-            restored = new double[raw.Length];
-            for (int i = 0; i < raw.Length; i++)
+            int n = raw.Length;
+            restored = new double[n];
+            for (int i = 0; i < n; i++)
             {
                 restored[i] = raw[i];
             }
-            for (int i = 1; i < raw.Length - 1; i++)
+            for (int i = 0; i < n; i++)
             {
-                if (raw[i] == -1 && raw[i - 1] != -1 && raw[i + 1] != -1)
+                if (raw[i] == -1)
                 {
-                    restored[i] = (raw[i - 1] + raw[i + 1]) / 2;
+                    int prev = (i - 1 + n) % n;
+                    int next = (i + 1) % n;
+                    if (raw[prev] != -1 && raw[next] != -1)
+                    {
+                        restored[i] = (raw[prev] + raw[next]) / 2;
+                    }
                 }
             }
             // end
