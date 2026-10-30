@@ -335,4 +335,3 @@ namespace Lab4
         }
     }
 }
-```
