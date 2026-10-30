@@ -1,125 +1,25 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Lab4
+if (magazine.Length < 3)
 {
-    public class Blue
+    indexes = new int[magazine.Length];
+    for (int i = 0; i < magazine.Length; i++)
     {
-        public void Task1(int[] array)
+        indexes[i] = i;
+    }
+}
+else
+{
+    int z = magazine[0] + magazine[1] + magazine[2];
+    indexes = new int[] { 0, 1, 2 };   // первая тройка уже считается лучшей
+    for (int i = 1; i < magazine.Length - 2; i++)
+    {
+        int zd = magazine[i] + magazine[i + 1] + magazine[i + 2];
+        if (zd > z)
         {
-
-            // code here
-
-            // end
-
-        }
-        public int[] Task2(int[] array, int P)
-        {
-            int[] answer = null;
-
-            // code here
-
-            // end
-
-            return answer;
-        }
-        public int[] Task3(int[] array)
-        {
-            int[] answer = null;
-
-            // code here
-
-            // end
-
-            return answer;
-        }
-        public void Task4(double[] array)
-        {
-
-            // code here
-
-            // end
-
-        }
-        public int Task5(int[] A, int[] B)
-        {
-            int sum = 0;
-
-            // code here
-
-            // end
-
-            return sum;
-        }
-        public int[] Task6(int[] array)
-        {
-            int[] indexes = null;
-
-            // code here
-
-            // end
-
-            return indexes;
-        }
-        public int Task7(int[] array)
-        {
-            int count = 0;
-
-            // code here
-
-            // end
-
-            return count;
-        }
-        public int[] Task8(int[] array)
-        {
-            int[] answer = null;
-
-            // code here
-
-            // end
-
-            return answer;
-        }
-        public double[] Task9(int[] array)
-        {
-            double[] normalized = null;
-
-            // code here
-
-            // end
-
-            return normalized;
-        }
-        public int Task10(int[] array, int P)
-        {
-            int index = 0;
-
-            // code here
-
-            // end
-
-            return index;
-        }
-        public int[] Task11(int a, int b, int c)
-        {
-            int[] array = null;
-
-            // code here
-
-            // end
-
-            return array;
-        }
-
-        public int[] Task12(int[] magazine)
-        {
-            int[] indexes = null;
-
-            // code here
-
-            // end
-
-            return indexes;
+            z = zd;
+            for (int j = 0; j < 3; j++)
+            {
+                indexes[j] = i + j;
+            }
         }
     }
 }
