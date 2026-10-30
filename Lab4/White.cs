@@ -1,262 +1,245 @@
-using System;
-
 namespace Lab4
 {
-public class White
-{
-// Task 1: Find the geometric length of the vector (square root of sum of squares)
-public double Task1(int[] vector)
-{
-double length = 0;
-if (vector == null || vector.Length == 0) return 0;
+    public class White
+    {
+        public double Task1(int[] vector)
+        {
+            double length = 0;
 
-double sumOfSquares = 0;
-for (int i = 0; i < vector.Length; i++)
-{
-sumOfSquares += (double)vector[i] * vector[i];
-}
+            // code here
+            if (vector == null) return 0;
+            double sum = 0;
+            for (int i = 0; i < vector.Length; i++)
+            {
+                sum += (double)vector[i] * vector[i];
+            }
+            length = Math.Sqrt(sum);
+            // end
 
-length = Math.Sqrt(sumOfSquares);
-return length;
-}
+            return length;
+        }
+        public int Task2(int[] array, int P, int Q)
+        {
+            int count = 0;
 
-// Task 2: Count how many elements sit strictly between boundaries P and Q
-public int Task2(int[] array, int P, int Q)
-{
-int count = 0;
-if (array == null) return 0;
+            // code here
+            if (array == null) return 0;
+            int min = P < Q ? P : Q;
+            int max = P < Q ? Q : P;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > min && array[i] < max) count++;
+            }
+            // end
 
-int minBound = Math.Min(P, Q);
-int maxBound = Math.Max(P, Q);
+            return count;
+        }
+        public void Task3(int[] array)
+        {
 
-for (int i = 0; i < array.Length; i++)
-{
-if (array[i] > minBound && array[i] < maxBound)
-{
-count++;
-}
-}
+            // code here
+            if (array == null || array.Length == 0) return;
+            int maxIndex = 0;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex]) maxIndex = i;
+            }
+            if (maxIndex == array.Length - 1) return;
+            int minIndex = maxIndex + 1;
+            for (int i = maxIndex + 1; i < array.Length; i++)
+            {
+                if (array[i] < array[minIndex]) minIndex = i;
+            }
+            if (array[minIndex] == array[maxIndex]) return;
+            int temp = array[maxIndex];
+            array[maxIndex] = array[minIndex];
+            array[minIndex] = temp;
+            // end
 
-return count;
-}
+        }
+        public void Task4(int[] array)
+        {
 
-// Task 3: Find the minimum element after the maximum element and swap them
-public void Task3(int[] array)
-{
-if (array == null || array.Length == 0) return;
+            // code here
+            if (array == null || array.Length == 0) return;
+            int maxIndex = 0;
+            for (int i = 2; i < array.Length; i += 2)
+            {
+                if (array[i] > array[maxIndex]) maxIndex = i;
+            }
+            array[maxIndex] = maxIndex;
+            // end
 
-int maxIndex = 0;
-for (int i = 1; i < array.Length; i++)
-{
-if (array[i] > array[maxIndex])
-{
-maxIndex = i;
-}
-}
+        }
+        public int Task5(int[] array, int P)
+        {
+            int index = 0;
 
-if (maxIndex == array.Length - 1) return;
+            // code here
+            index = -1;
+            if (array == null) return index;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == P)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            // end
 
-int minIndex = maxIndex + 1;
-for (int i = maxIndex + 2; i < array.Length; i++)
-{
-if (array[i] < array[minIndex])
-{
-minIndex = i;
-}
-}
+            return index;
+        }
+        public void Task6(int[] array)
+        {
 
-int temp = array[maxIndex];
-array[maxIndex] = array[minIndex];
-array[minIndex] = temp;
-}
+            // code here
+            if (array == null || array.Length == 0) return;
+            int maxIndex = 0;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex]) maxIndex = i;
+            }
+            for (int i = 0; i + 1 < maxIndex; i += 2)
+            {
+                int temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+            // end
 
-// Task 4: Double all elements that come after the maximum element
-public void Task4(int[] array)
-{
-if (array == null || array.Length < 2) return;
+        }
+        public int[] Task7(int[] array)
+        {
+            int[] answer = null;
 
-int maxIndex = 0;
-for (int i = 1; i < array.Length; i++)
-{
-if (array[i] > array[maxIndex])
-{
-maxIndex = i;
-}
-}
+            // code here
+            if (array == null) return null;
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0) count++;
+            }
+            answer = new int[count];
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    answer[k] = array[i];
+                    k++;
+                }
+            }
+            // end
 
-for (int i = maxIndex + 1; i < array.Length; i++)
-{
-array[i] *= 2;
-}
-}
+            return answer;
+        }
+        public void Task8(int[] array)
+        {
 
-// Task 5: Find the index of the first element that is strictly less than parameter P
-public int Task5(int[] array, int P)
-{
-int index = -1;
-if (array == null) return index;
+            // code here
+            if (array == null) return;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < array.Length; j++)
+                {
+                    if (array[j] > array[maxIndex]) maxIndex = j;
+                }
+                int temp = array[i];
+                array[i] = array[maxIndex];
+                array[maxIndex] = temp;
+            }
+            // end
 
-for (int i = 0; i < array.Length; i++)
-{
-if (array[i] < P)
-{
-index = i;
-break;
-}
-}
-return index;
-}
+        }
+        public void Task9(int[] array)
+        {
 
-// Task 6: Swap adjacent elements before the maximum element
-public void Task6(int[] array)
-{
-if (array == null || array.Length < 2) return;
+            // code here
+            if (array == null) return;
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                int temp = array[i];
+                array[i] = array[array.Length - 1 - i];
+                array[array.Length - 1 - i] = temp;
+            }
+            // end
 
-int maxIndex = 0;
-for (int i = 1; i < array.Length; i++)
-{
-if (array[i] > array[maxIndex])
-{
-maxIndex = i;
-}
-}
+        }
+        public int[] Task10(int[] A, int[] B)
+        {
+            int[] C = null;
 
-for (int i = 0; i + 1 < maxIndex; i += 2)
-{
-int temp = array[i];
-array[i] = array[i + 1];
-array[i + 1] = temp;
-}
-}
+            // code here
+            int lenA = A == null ? 0 : A.Length;
+            int lenB = B == null ? 0 : B.Length;
+            C = new int[lenA + lenB];
+            int ia = 0, ib = 0, k = 0;
+            while (ia < lenA || ib < lenB)
+            {
+                if (ia < lenA)
+                {
+                    C[k] = A[ia];
+                    k++;
+                    ia++;
+                }
+                if (ib < lenB)
+                {
+                    C[k] = B[ib];
+                    k++;
+                    ib++;
+                }
+            }
+            // end
 
-// Task 7: Filter out negative values into a new array
-public int[] Task7(int[] array)
-{
-if (array == null) return null;
+            return C;
+        }
+        public double[] Task11(double a, double b, int n)
+        {
+            double[] array = null;
 
-int count = 0;
-for (int i = 0; i < array.Length; i++)
-{
-if (array[i] >= 0) count++;
-}
+            // code here
+            if (a == b && n == 1)
+            {
+                array = new double[] { a };
+            }
+            else if (a != b && n >= 2)
+            {
+                array = new double[n];
+                double step = (b - a) / (n - 1);
+                for (int i = 0; i < n; i++)
+                {
+                    array[i] = a + i * step;
+                }
+                array[n - 1] = b;
+            }
+            // end
 
-int[] answer = new int[count];
-int j = 0;
-for (int i = 0; i < array.Length; i++)
-{
-if (array[i] >= 0)
-{
-answer[j] = array[i];
-j++;
-}
-}
-return answer;
-}
+            return array;
+        }
 
-// Task 8: Sort descending in-place directly on the array (void method)
-public void Task8(int[] array)
-{
-if (array == null) return;
+        public double[] Task12(double[] raw)
+        {
+            double[] restored = null;
 
-for (int i = 0; i < array.Length - 1; i++)
-{
-for (int j = i + 1; j < array.Length; j++)
-{
-if (array[i] < array[j])
-{
-int temp = array[i];
-array[i] = array[j];
-array[j] = temp;
-}
-}
-}
-}
+            // code here
+            if (raw == null || raw.Length < 3) return null;
+            restored = new double[raw.Length];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                restored[i] = raw[i];
+            }
+            for (int i = 1; i < raw.Length - 1; i++)
+            {
+                if (raw[i] == -1 && raw[i - 1] != -1 && raw[i + 1] != -1)
+                {
+                    restored[i] = (raw[i - 1] + raw[i + 1]) / 2;
+                }
+            }
+            // end
 
-// Task 9: Reverse elements in-place directly on the array (void method)
-public void Task9(int[] array)
-{
-if (array == null) return;
-
-for (int i = 0; i < array.Length / 2; i++)
-{
-int temp = array[i];
-array[i] = array[array.Length - 1 - i];
-array[array.Length - 1 - i] = temp;
-}
-}
-
-// Task 10: Alternate merge elements from arrays A and B
-public int[] Task10(int[] A, int[] B)
-{
-if (A == null) A = new int[0];
-if (B == null) B = new int[0];
-
-int[] C = new int[A.Length + B.Length];
-int a = 0, b = 0, c = 0;
-
-while (a < A.Length && b < B.Length)
-{
-C[c++] = A[a++];
-C[c++] = B[b++];
-}
-
-while (a < A.Length) C[c++] = A[a++];
-while (b < B.Length) C[c++] = B[b++];
-
-return C;
-}
-
-// Task 11: Create an array of n equally spaced values between a and b
-public double[] Task11(double a, double b, int n)
-{
-if (n <= 1) return null;
-
-double[] result = new double[n];
-double step = (b - a) / (n - 1);
-
-for (int i = 0; i < n; i++)
-{
-result[i] = a + step * i;
-}
-
-result[0] = a;
-result[n - 1] = b;
-
-return result;
-}
-
-// Task 12: Restore damaged elements marked with -1.0 using nearest valid neighbors
-public double[] Task12(double[] raw)
-{
-if (raw == null) return null;
-
-double[] restored = (double[])raw.Clone();
-if (raw.Length < 3) return restored;
-
-for (int i = 1; i < raw.Length - 1; i++)
-{
-if (raw[i] == -1.0)
-{
-int leftIndex = i - 1;
-while (leftIndex >= 0 && raw[leftIndex] == -1.0)
-{
-leftIndex--;
-}
-
-int rightIndex = i + 1;
-while (rightIndex < raw.Length && raw[rightIndex] == -1.0)
-{
-rightIndex++;
-}
-
-if (leftIndex >= 0 && rightIndex < raw.Length)
-{
-restored[i] = (raw[leftIndex] + raw[rightIndex]) / 2.0;
-}
-}
-}
-
-return restored;
-}
-}
+            return restored;
+        }
+    }
 }
