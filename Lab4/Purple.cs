@@ -133,22 +133,23 @@ namespace Lab4
         {
             int[] answer = null;
 
-            // code here
-            if (A == null || B == null || k < 1 || k > A.Length) return null;
-
+           // code here
+            if (A == null || B == null) return null;
+            if (k < 0 || k > A.Length) return null;
+            
             answer = new int[A.Length + B.Length];
             int index = 0;
-
+            
             for (int i = 0; i < k; i++)
             {
                 answer[index++] = A[i];
             }
-
+            
             for (int i = 0; i < B.Length; i++)
             {
                 answer[index++] = B[i];
             }
-
+            
             for (int i = k; i < A.Length; i++)
             {
                 answer[index++] = A[i];
@@ -320,34 +321,42 @@ namespace Lab4
             double[] Xext = null, Yext = null;
 
             // code here
-            if (a >= b || n < 3) return (null, null);
-
+            if (n <= 0) return (null, null);
+            
+            Xext = new double[0];
+            Yext = new double[0];
+            
+            if (n < 3 || a == b) return (Xext, Yext);
+            
             X = new double[n];
             Y = new double[n];
             double step = (b - a) / (n - 1);
-
+            
             for (int i = 0; i < n; i++)
             {
                 X[i] = a + i * step;
                 Y[i] = Math.Cos(X[i]) + X[i] * Math.Sin(X[i]);
             }
-
+            
             int extCount = 0;
+            
             for (int i = 1; i < n - 1; i++)
             {
-                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) || (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
+                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) ||
+                    (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
                 {
                     extCount++;
                 }
             }
-
+            
             Xext = new double[extCount];
             Yext = new double[extCount];
             int idx = 0;
-
+            
             for (int i = 1; i < n - 1; i++)
             {
-                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) || (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
+                if ((Y[i] > Y[i - 1] && Y[i] > Y[i + 1]) ||
+                    (Y[i] < Y[i - 1] && Y[i] < Y[i + 1]))
                 {
                     Xext[idx] = X[i];
                     Yext[idx] = Y[i];
