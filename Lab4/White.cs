@@ -290,36 +290,101 @@ array = result;
             return array;
         }
 
-        public double[] Task12(double[] raw)
-        {
-    
-            // code here
-    if (raw == null ) return null;
-  double[] restored = (double[])raw.Clone();
-            
-    if (raw.Length <3) return restored;
-            bool allDamaged = true;
-    for (int i = 0; i < raw.Length; i++)
-    {
-        if (raw[i] != -1.0)
-        {
-            allDamaged = false;
-            break;
-        }
-    }
+       // Task 12: Restore damaged elements marked with -1.0
+using nearest valid neighbors
+public double[] Task12(double[] raw)
+{
+// 1. Safe boundary check: if the array is null, return
 
-    if (allDamaged) return restored;
+null immediately
 
-   for (int i = 1; i < raw.Length - 1; i++)
-    {
-        if (raw[i] == -1.0)
-        {
-                if (raw [i - 1] != -1.0 && raw[i + 1] != -1.0)
-                {
-                       restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
-                   }
-               }
-                }
+if (raw == null) return null;
+
+// 2. Clone the original array to avoid overwriting
+
+input arguments directly
+
+double[] restored = (double[])raw.Clone();
+
+// 3. Short array check: if length is under 3, return
+
+the array copy unmodified
+
+if (raw.Length < 3) return restored;
+
+// 4. Verification loop: check if every single item in
+
+the array is broken (-1.0)
+
+bool allDamaged = true;
+for (int i = 0; i < raw.Length; i++)
+{
+if (raw[i] != -1.0)
+
+{
+allDamaged = false;
+break;
+}
+}
+// If everything is damaged, no restoration can take
+
+place; return array as is
+
+if (allDamaged) return restored;
+
+// 5. Main traversal: inspect elements between the
+
+first and last indexes
+
+for (int i = 1; i < raw.Length - 1; i++)
+{
+if (raw[i] == -1.0)
+{
+// Scan backward to locate the nearest
+
+valid left neighbor index
+
+int leftIndex = i - 1;
+while (leftIndex >= 0 && raw[leftIndex]
+
+== -1.0)
+
+{
+leftIndex--;
+
+}
+
+// Scan forward to locate the nearest valid
+
+right neighbor index
+
+int rightIndex = i + 1;
+while (rightIndex < raw.Length &&
+
+raw[rightIndex] == -1.0)
+{
+rightIndex++;
+}
+
+// If valid boundaries exist on both sides,
+
+calculate the arithmetic mean
+
+if (leftIndex >= 0 && rightIndex <
+
+raw.Length)
+
+{
+restored[i] = (raw[leftIndex] +
+
+raw[rightIndex]) / 2.0;
+}
+}
+}
+
+// 6. Return the successfully restored array output
+return restored;
+}
             // end
 
             return restored;
