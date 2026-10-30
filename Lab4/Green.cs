@@ -340,51 +340,54 @@
             double[] A = null;
             double[] B = null;
             
-            if (n <= 1 || a >= b)
-            {
-                return B;
-            }
+            if (n < 2 || a == b)
+                return null;
+
+            double h = (b - a) / (n - 1);
 
             A = new double[n];
-            double step = (b - a) / (n - 1);
 
             for (int i = 0; i < n; i++)
             {
-                A[i] = a + i * step;
+                A[i] = a + h * i;
             }
 
             double sum = 0;
-            int posCount = 0;
+            int positive = 0;
 
             for (int i = 0; i < n; i++)
             {
                 if (A[i] > 0)
                 {
                     sum += A[i];
-                    posCount++;
+                    positive++;
                 }
             }
 
-            double avg = posCount > 0 ? sum / posCount : 0;
-            int countB = 0;
+            B = new double[0];
+
+            if (positive == 0)
+                return B;
+
+            double avg = sum / positive;
+            int size = 0;
 
             for (int i = 0; i < n; i++)
             {
-                if (A[i] > 0 && A[i] > avg)
-                {
-                    countB++;
-                }
+                if (A[i] > avg)
+                    size++;
             }
 
-            B = new double[countB];
-            int index = 0;
+            B = new double[size];
+
+            int k = 0;
 
             for (int i = 0; i < n; i++)
             {
-                if (A[i] > 0 && A[i] > avg)
+                if (A[i] > avg)
                 {
-                    B[index] = A[i];
-                    index++;
+                    B[k] = A[i];
+                    k++;
                 }
             }
 
