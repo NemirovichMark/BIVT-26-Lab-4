@@ -136,24 +136,23 @@ namespace Lab4
         
             // code here
             if (A == null || B == null) return null;
-            if (k < 0 || k > A.Length) return null;
+            
+            if (k < 0) k = 0;
+            if (k > A.Length) k = A.Length;
             
             answer = new int[A.Length + B.Length];
             int index = 0;
-            
-            // Берем первые k элементов из A
+        
             for (int i = 0; i < k; i++)
             {
                 answer[index++] = A[i];
             }
             
-            // Вставляем весь массив B
             for (int i = 0; i < B.Length; i++)
             {
                 answer[index++] = B[i];
             }
             
-            // Добавляем оставшиеся элементы из A
             for (int i = k; i < A.Length; i++)
             {
                 answer[index++] = A[i];
@@ -325,8 +324,14 @@ namespace Lab4
             double[] X = null, Y = null;
             double[] Xext = null, Yext = null;
         
-           // code here
-            if (n < 3 || a >= b) return (null, null);
+            // code here
+            if (a == b)
+            {
+                if (n == 1) return (new double[0], new double[0]);
+                return (null, null);
+            }
+
+            if (n <= 1) return (null, null);
             
             X = new double[n];
             Y = new double[n];
