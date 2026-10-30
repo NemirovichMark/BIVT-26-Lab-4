@@ -195,12 +195,7 @@ namespace Lab4
             {
                 length = 1;
                 int cur = 1;
-                for (int i = 0; i + 1 < array.Length; i++)
-                {
-                    if (array[i] > array[i + 1])
-                    {
-  length = 1;
-                int cur = 1;
+
                 for (int i = 0; i + 1 < array.Length; i++)
                 {
                     if (array[i] > array[i + 1])
