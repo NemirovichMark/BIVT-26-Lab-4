@@ -38,7 +38,7 @@ namespace Lab4
                 sum = sum + array[i] * array[i];
             }
             // end
-            return 0; // 老师要求：没负数返回0
+            return 0; 
         }
 
         public int[] Task3(int[] array)
