@@ -4,20 +4,17 @@ namespace Lab4
     {
         public void Task1(double[] array)
         {
-            // code here
-            if (array == null || array.Length == 0) return;
-            
             double sum = 0;
             int count = 0;
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] > 0)
                 {
-                    sum = sum + array[i];
-                    count = count + 1;
+                    sum += array[i];
+                    count++;
                 }
             }
-            
+
             if (count > 0)
             {
                 double avg = sum / count;
@@ -29,386 +26,320 @@ namespace Lab4
                     }
                 }
             }
-            // end
         }
 
         public int Task2(int[] array)
         {
             int sum = 0;
-            // code here
-            if (array == null || array.Length == 0) return 0;
-            
+            int firstNegIdx = -1;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] < 0) 
+                if (array[i] < 0)
                 {
-                    return sum; 
+                    firstNegIdx = i;
+                    break;
                 }
-                sum = sum + array[i] * array[i];
             }
-            // end
-            return 0; // 【修复】如果没有负数，必须返回 0
+
+            if (firstNegIdx > 0)
+            {
+                for (int i = 0; i < firstNegIdx; i++)
+                {
+                    sum += array[i] * array[i];
+                }
+            }
+            return sum;
         }
 
         public int[] Task3(int[] array)
         {
             int[] negatives = null;
-            // code here
-            if (array == null || array.Length == 0) return new int[0];
+            if (array == null || array.Length == 0) return null;
 
-            int maxIdx = 0;
-            int minIdx = 0;
+            int maxVal = array[0], minVal = array[0];
+            int maxIdx = 0, minIdx = 0;
+
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > array[maxIdx]) maxIdx = i;
-                if (array[i] < array[minIdx]) minIdx = i;
+                if (array[i] > maxVal) { maxVal = array[i]; maxIdx = i; }
+                if (array[i] < minVal) { minVal = array[i]; minIdx = i; }
             }
 
-            int start = 0;
-            int end = 0;
-            if (maxIdx < minIdx) 
-            { 
-                start = maxIdx + 1; 
-                end = minIdx; 
-            }
-            else 
-            { 
-                start = minIdx + 1; 
-                end = maxIdx; 
-            }
+            int start = Math.Min(maxIdx, minIdx);
+            int end = Math.Max(maxIdx, minIdx);
 
             int count = 0;
-            for (int i = start; i < end; i++)
+            for (int i = start + 1; i < end; i++)
             {
-                if (array[i] < 0) count = count + 1;
+                if (array[i] < 0) count++;
             }
 
-            negatives = new int[count];
-            int k = 0;
-            for (int i = start; i < end; i++)
+            if (count > 0)
             {
-                if (array[i] < 0)
+                negatives = new int[count];
+                int k = 0;
+                for (int i = start + 1; i < end; i++)
                 {
-                    negatives[k] = array[i];
-                    k = k + 1;
+                    if (array[i] < 0)
+                    {
+                        negatives[k++] = array[i];
+                    }
                 }
             }
-            // end
             return negatives;
         }
 
         public void Task4(int[] array)
         {
-            // code here
             if (array == null || array.Length == 0) return;
 
+            int maxVal = array[0];
             int maxIdx = 0;
-            for (int i = 1; i < array.Length; i++)
-            {
-                if (array[i] > array[maxIdx]) maxIdx = i;
-            }
+            int firstNegIdx = -1;
 
-            int negIdx = -1;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] < 0)
+                if (array[i] > maxVal)
                 {
-                    negIdx = i;
-                    break;
+                    maxVal = array[i];
+                    maxIdx = i;
+                }
+                if (firstNegIdx == -1 && array[i] < 0)
+                {
+                    firstNegIdx = i;
                 }
             }
 
-            if (negIdx != -1)
+            if (firstNegIdx != -1)
             {
                 int temp = array[maxIdx];
-                array[maxIdx] = array[negIdx];
-                array[negIdx] = temp;
+                array[maxIdx] = array[firstNegIdx];
+                array[firstNegIdx] = temp;
             }
-            // end
         }
 
         public int[] Task5(int[] array)
         {
             int[] answer = null;
-            // code here
-            if (array == null || array.Length == 0) return new int[0];
+            if (array == null || array.Length == 0) return answer;
 
-            int max = array[0];
+            int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > max) max = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
             int count = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == max) count = count + 1;
+                if (array[i] == maxVal) count++;
             }
 
-            answer = new int[count];
-            int k = 0;
-            for (int i = 0; i < array.Length; i++)
+            if (count > 0)
             {
-                if (array[i] == max)
+                answer = new int[count];
+                int k = 0;
+                for (int i = 0; i < array.Length; i++)
                 {
-                    answer[k] = i;
-                    k = k + 1;
+                    if (array[i] == maxVal) answer[k++] = i;
                 }
             }
-            // end
             return answer;
         }
 
         public void Task6(int[] array)
         {
-            // code here
             if (array == null || array.Length == 0) return;
 
-            int max = array[0];
+            int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > max) max = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
-            int order = 0;
+            int order = 1;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == max)
+                if (array[i] == maxVal)
                 {
-                    order = order + 1;
-                    array[i] = array[i] + order;
+                    array[i] += order;
+                    order++;
                 }
             }
-            // end
         }
 
         public void Task7(int[] array)
         {
-            // code here
             if (array == null || array.Length == 0) return;
 
-            int max = array[0];
+            int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > max) max = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
             int runningSum = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                int current = array[i]; 
-                if (current == max)
+                if (array[i] == maxVal)
                 {
                     array[i] = runningSum;
+                    runningSum += array[i];
                 }
-                runningSum = runningSum + current; 
+                else
+                {
+                    runningSum += array[i];
+                }
             }
-            // end
         }
 
         public int Task8(int[] array)
         {
             int length = 0;
-            // code here
             if (array == null || array.Length == 0) return 0;
-            if (array.Length == 1) return 1;
 
+            int currentLen = 1;
             length = 1;
-            int cur = 1;
-            for (int i = 0; i < array.Length - 1; i++)
+
+            for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > array[i + 1])
+                if (array[i] < array[i - 1])
                 {
-                    cur = cur + 1;
-                    if (cur > length) length = cur;
+                    currentLen++;
                 }
                 else
                 {
-                    cur = 1;
+                    currentLen = 1;
+                }
+
+                if (currentLen > length)
+                {
+                    length = currentLen;
                 }
             }
-            // end
             return length;
         }
 
         public void Task9(int[] array)
         {
-            // code here
-            if (array == null || array.Length == 0) return;
+            if (array == null || array.Length <= 2) return;
 
-            int evenCount = (array.Length + 1) / 2;
-            int[] temp = new int[evenCount];
-            int k = 0;
-            for (int i = 0; i < array.Length; i += 2)
+            for (int i = 2; i < array.Length; i += 2)
             {
-                temp[k] = array[i];
-                k = k + 1;
-            }
-
-            for (int i = 1; i < evenCount; i++)
-            {
-                int key = temp[i];
-                int j = i - 1;
-                while (j >= 0 && temp[j] > key)
+                int key = array[i];
+                int j = i - 2;
+                while (j >= 0 && array[j] > key)
                 {
-                    temp[j + 1] = temp[j];
-                    j = j - 1;
+                    array[j + 2] = array[j];
+                    j -= 2;
                 }
-                temp[j + 1] = key;
+                array[j + 2] = key;
             }
-
-            k = 0;
-            for (int i = 0; i < array.Length; i += 2)
-            {
-                array[i] = temp[k];
-                k = k + 1;
-            }
-            // end
         }
 
-        public int[] Task10(int[]array)
+        public int[] Task10(int[] array)
         {
             int[] cleared = null;
-            // code here
-            if (array == null || array.Length == 0) return new int[0];
+            if (array == null || array.Length == 0) return cleared;
 
-            int count = 0;
+            bool[] isDuplicate = new bool[array.Length];
+            int uniqueCount = 0;
+
             for (int i = 0; i < array.Length; i++)
             {
-                bool isDup = false;
-                for (int j = 0; j < count; j++)
+                if (!isDuplicate[i])
                 {
-                    if (array[j] == array[i])
+                    uniqueCount++;
+                    for (int j = i + 1; j < array.Length; j++)
                     {
-                        isDup = true;
-                        break;
+                        if (array[i] == array[j])
+                        {
+                            isDuplicate[j] = true;
+                        }
                     }
-                }
-                
-                if (isDup == false)
-                {
-                    array[count] = array[i];
-                    count = count + 1;
                 }
             }
 
-            cleared = new int[count];
-            for (int i = 0; i < count; i++)
+            cleared = new int[uniqueCount];
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
             {
-                cleared[i] = array[i];
+                if (!isDuplicate[i])
+                {
+                    cleared[k++] = array[i];
+                }
             }
-            // end
             return cleared;
         }
 
         public double[] Task11(double a, double b, int n)
         {
             double[] A = null, B = null;
-            // code here
-        
-            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b))
+
+            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b)) return B;
+
+            A = new double[n];
+            for (int i = 0; i < n; i++)
             {
-                return null;
+                if (n == 1) A[i] = a;
+                else A[i] = a + i * (b - a) / (n - 1);
             }
 
-            if (n == 1 && a == b)
+            double posSum = 0;
+            int posCount = 0;
+            for (int i = 0; i < n; i++)
             {
-                A = new double[1];
-                A[0] = a;
+                if (A[i] > 0)
+                {
+                    posSum += A[i];
+                    posCount++;
+                }
+            }
+
+            if (posCount > 0)
+            {
+                double avgPos = posSum / posCount;
+                B = new double[posCount];
+                int k = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    if (A[i] > 0 && A[i] > avgPos)
+                    {
+                        B[k++] = A[i];
+                    }
+                }
+                if (k < posCount)
+                {
+                    double[] tempB = new double[k];
+                    Array.Copy(B, tempB, k);
+                    B = tempB;
+                }
             }
             else
             {
-                A = new double[n];
-                double step = (b - a) / (n - 1);
-                for (int i = 0; i < n; i++)
-                {
-                    A[i] = a + step * i;
-                }
+                B = new double[0];
             }
-
-            if (A != null)
-            {
-                double sum = 0;
-                int count = 0;
-                for (int i = 0; i < n; i++)
-                {
-                    if (A[i] > 0)
-                    {
-                        sum = sum + A[i];
-                        count = count + 1;
-                    }
-                }
-
-                if (count > 0)
-                {
-                    double avg = sum / count;
-                    int countB = 0;
-                    for (int i = 0; i < n; i++)
-                    {
-                        if (A[i] > 0 && A[i] > avg)
-                        {
-                            countB = countB + 1;
-                        }
-                    }
-
-                    B = new double[countB];
-                    int k = 0;
-                    for (int i = 0; i < n; i++)
-                    {
-                        if (A[i] > 0 && A[i] > avg)
-                        {
-                            B[k] = A[i];
-                            k = k + 1;
-                        }
-                    }
-                }
-                else
-                {
-                    B = new double[0];
-                }
-            }
-            // end
             return B;
         }
 
         public int Task12(int[] dices)
         {
-            int wins = 0;
-            // code here
             if (dices == null || dices.Length == 0) return 0;
 
-            int[] finalDices = new int[dices.Length];
-            int curse = 0;
-            
-            for (int i = 0; i < dices.Length; i++)
-            {
-                int val = dices[i] - curse;
-                if (val < 1) val = 1;
-                finalDices[i] = val;
+            int maxVal = dices[0];
+            int wins = 0;
 
-                if (dices[i] == 6)
+            for (int i = 1; i < dices.Length; i++)
+            {
+                if (dices[i] > maxVal)
                 {
-                    curse = curse + 1;
+                    wins++;
+                }
+                if (dices[i] > maxVal)
+                {
+                    maxVal = dices[i];
                 }
             }
-
-            curse = 0;
-            for (int i = 0; i < dices.Length; i++)
-            {
-                int dealerVal = 6 - curse;
-                if (dealerVal < 1) dealerVal = 1;
-
-                if (finalDices[i] > dealerVal)
-                {
-                    wins = wins + 1;
-                }
-
-                if (dices[i] == 6)
-                {
-                    curse = curse + 1;
-                }
-            }
-            // end
             return wins;
         }
     }
