@@ -2,10 +2,8 @@ namespace Lab4
 {
     public class Green
     {
-        
         public void Task1(double[] array)
         {
-            // code here
             double sum = 0;
             int count = 0;
             for (int i = 0; i < array.Length; i++)
@@ -23,38 +21,37 @@ namespace Lab4
                 for (int i = 0; i < array.Length; i++)
                 {
                     if (array[i] > 0)
+                    {
                         array[i] = avg;
+                    }
                 }
             }
-            // end
         }
 
         public int Task2(int[] array)
         {
             int sum = 0;
-            // code here limitIndex = -1;
-            int
+            int firstNegIdx = -1;
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] < 0)
+                {
+                    firstNegIdx = i;
                     break;
+                }
             }
-        }
-        for (int i = 0; i <limitIndex; i++)
-        {
+
+            for (int i = 0; i < firstNegIdx; i++)
+            {
                 sum += array[i] * array[i];
             }
-            // end
-
             return sum;
         }
 
         public int[] Task3(int[] array)
         {
             int[] negatives = null;
-            // code here
-            if (array == null || array.Length == 0)
-                return negatives;
+            if (array == null || array.Length == 0) return null;
 
             int maxVal = array[0], minVal = array[0];
             int maxIdx = 0, minIdx = 0;
@@ -71,7 +68,7 @@ namespace Lab4
             int count = 0;
             for (int i = start + 1; i < end; i++)
             {
-                if (array[i] < 0) count++:
+                if (array[i] < 0) count++;
             }
 
             if (count > 0)
@@ -82,25 +79,16 @@ namespace Lab4
                 {
                     if (array[i] < 0)
                     {
-                        negatives[k] = array[i];
-                        k++;
+                        negatives[k++] = array[i];
                     }
                 }
             }
-            else
-            {
-                negatives = new int[0];
-            }
-            // end
-
             return negatives;
         }
 
         public void Task4(int[] array)
         {
-            // code here
-            if (array == null || array.Length == 0)
-                return;
+            if (array == null || array.Length == 0) return;
 
             int maxVal = array[0];
             int maxIdx = 0;
@@ -114,7 +102,9 @@ namespace Lab4
                     maxIdx = i;
                 }
                 if (firstNegIdx == -1 && array[i] < 0)
+                {
                     firstNegIdx = i;
+                }
             }
 
             if (firstNegIdx != -1)
@@ -123,56 +113,45 @@ namespace Lab4
                 array[maxIdx] = array[firstNegIdx];
                 array[firstNegIdx] = temp;
             }
-            // end
         }
 
         public int[] Task5(int[] array)
         {
             int[] answer = null;
-            // code here
-            if (array == null || array.Length == 0)
-                return answer;
+            if (array == null || array.Length == 0) return answer;
 
             int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > maxVal)
-                    maxVal = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
             int count = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == maxVal)
-                    count++;
+                if (array[i] == maxVal) count++;
             }
 
-            answer = new int[count];
-            int k = 0;
-            for (int i = 0; i < array.Length; i++)
+            if (count > 0)
             {
-                if (array[i] == maxVal)
+                answer = new int[count];
+                int k = 0;
+                for (int i = 0; i < array.Length; i++)
                 {
-                    answer[k] = i;
-                    k++;
+                    if (array[i] == maxVal) answer[k++] = i;
                 }
             }
-            // end
-
             return answer;
         }
-        
+
         public void Task6(int[] array)
         {
-            // code here
-            if (array == null || array.Length == 0)
-                return;
+            if (array == null || array.Length == 0) return;
 
             int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > maxVal)
-                    maxVal = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
             int order = 1;
@@ -184,18 +163,16 @@ namespace Lab4
                     order++;
                 }
             }
-            // end
         }
 
         public void Task7(int[] array)
         {
-            // code here
             if (array == null || array.Length == 0) return;
 
             int maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > maxVal)  maxVal = array[i];
+                if (array[i] > maxVal) maxVal = array[i];
             }
 
             int runningSum = 0;
@@ -205,17 +182,14 @@ namespace Lab4
                 {
                     array[i] = runningSum;
                 }
-                prefixSum += array[i];
+                runningSum += array[i];
             }
-            // end
         }
 
         public int Task8(int[] array)
         {
             int length = 0;
-            // code here
-            if (array == null || array.Length == 0)
-                return 0;
+            if (array == null || array.Length == 0) return 0;
 
             int currentLen = 1;
             length = 1;
@@ -223,23 +197,25 @@ namespace Lab4
             for (int i = 1; i < array.Length; i++)
             {
                 if (array[i] < array[i - 1])
+                {
                     currentLen++;
+                }
                 else
+                {
                     currentLen = 1;
+                }
 
                 if (currentLen > length)
+                {
                     length = currentLen;
+                }
             }
-            // end
-
             return length;
         }
 
         public void Task9(int[] array)
         {
-            // code here
-            if (array == null || array.Length <= 2)
-                return;
+            if (array == null || array.Length <= 2) return;
 
             for (int i = 2; i < array.Length; i += 2)
             {
@@ -252,15 +228,12 @@ namespace Lab4
                 }
                 array[j + 2] = key;
             }
-            // end
         }
 
         public int[] Task10(int[] array)
         {
             int[] cleared = null;
-            // code here
-            if (array == null || array.Length == 0)
-                return cleared;
+            if (array == null || array.Length == 0) return cleared;
 
             bool[] isDuplicate = new bool[array.Length];
             int uniqueCount = 0;
@@ -273,7 +246,9 @@ namespace Lab4
                     for (int j = i + 1; j < array.Length; j++)
                     {
                         if (array[i] == array[j])
+                        {
                             isDuplicate[j] = true;
+                        }
                     }
                 }
             }
@@ -284,32 +259,23 @@ namespace Lab4
             {
                 if (!isDuplicate[i])
                 {
-                    cleared[k] = array[i];
-                    k++;
+                    cleared[k++] = array[i];
                 }
             }
-            // end
-
             return cleared;
         }
 
         public double[] Task11(double a, double b, int n)
         {
             double[] A = null, B = null;
-            // code here
-            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b))
-                return B;
+
+            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b)) return B;
 
             A = new double[n];
-            if (n == 1)
+            for (int i = 0; i < n; i++)
             {
-                A[0] = a;
-            }
-            else
-            {
-                double step = (b - a) / (n - 1);
-                for (int i = 0; i < n; i++)
-                    A[i] = a + i * step;
+                if (n == 1) A[i] = a;
+                else A[i] = a + i * (b - a) / (n - 1);
             }
 
             double posSum = 0;
@@ -332,11 +298,9 @@ namespace Lab4
                 {
                     if (A[i] > 0 && A[i] > avgPos)
                     {
-                        B[k] = A[i];
-                        k++;
+                        B[k++] = A[i];
                     }
                 }
-
                 if (k < posCount)
                 {
                     double[] tempB = new double[k];
@@ -348,32 +312,28 @@ namespace Lab4
             {
                 B = new double[0];
             }
-            // end
-
             return B;
         }
 
-        public int Task12(int[] dicss)
+        public int Task12(int[] dices)
         {
             int wins = 0;
-            // code here
-            if (dicss == null || dicss.Length == 0)
-                return wins;
+            if (dices == null || dices.Length == 0) return wins;
 
-            int n = dicss.Length;
+            int n = dices.Length;
             int[] result = new int[n];
-
-            for (int i = 0; i < n; i++)
-                result[i] = dicss[i];
+            for (int i = 0; i < n; i++) result[i] = dices[i];
 
             for (int i = 0; i < n; i++)
             {
-                if (dicss[i] == 6)
+                if (dices[i] == 6)
                 {
                     for (int j = i + 1; j < n; j++)
                     {
                         if (result[j] > 1)
+                        {
                             result[j]--;
+                        }
                     }
                 }
             }
@@ -381,10 +341,10 @@ namespace Lab4
             for (int i = 0; i < n; i++)
             {
                 if (result[i] > 6)
+                {
                     wins++;
+                }
             }
-            // end
-
             return wins;
         }
     }
