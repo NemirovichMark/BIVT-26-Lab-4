@@ -7,6 +7,13 @@
             double length = 0;
 
             // code here
+            for (int i = 0; i < vector.Length; i++)
+            {
+                length += vector[i] * vector[i];
+            }
+
+            length = Math.Sqrt(length);
+
 
             // end
 
@@ -17,6 +24,14 @@
             int count = 0;
 
             // code here
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > Math.Min(P, Q) && array[i] < Math.Max(P, Q))
+                {
+                    count++;
+                }
+            }
+
 
             // end
 
@@ -26,7 +41,43 @@
         {
 
             // code here
+            if (array.Length == 0)
+            {
+                return;
+            }
 
+            int maxIndex = 0;
+            for (int i=0; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex])
+                {
+                    maxIndex = i;
+                }
+            }
+
+            if (maxIndex == array.Length - 1)
+            {
+                return;
+            }
+            int minIndex = maxIndex+1;
+
+            
+           
+
+            for (int i = maxIndex + 2; i < array.Length; i++)
+            {
+                if (array[i] < array[minIndex])
+                {
+                    minIndex = i;
+                }
+            }
+            if (array[minIndex] == array[maxIndex])
+            {
+                return;
+            }
+            int temp = array[minIndex];
+            array[minIndex] = array[maxIndex];
+            array[maxIndex] = temp;
             // end
 
         }
@@ -34,15 +85,33 @@
         {
 
             // code here
-
+            if (array.Length == 0)
+                return;
+            int maxIndex = 0;
+            for (int i = 0; i < array.Length; i+=2)
+            {
+                if (array[i] > array[maxIndex])
+                    {
+                    maxIndex = i;
+                    }
+            }
+            array[maxIndex] = maxIndex; 
             // end
 
         }
         public int Task5(int[] array, int P)
         {
-            int index = 0;
+            int index = -1;
 
             // code here
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] ==P)
+                    {
+                    index=i;
+                    break;
+                    }
+            }
 
             // end
 
@@ -52,6 +121,24 @@
         {
 
             // code here
+            if (array.Length == 0)
+                return;
+            int maxIndex = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > array[maxIndex])
+                    {
+                    maxIndex = i;
+                    }
+            }
+
+            for (int i = 0; i + 1 < maxIndex; i += 2)
+            {
+                int temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+
 
             // end
 
@@ -61,6 +148,24 @@
             int[] answer = null;
 
             // code here
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    count++;
+                }
+            }
+            answer = new int[count];
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    answer[k] = array[i];
+                    k++;
+                }
+            }
 
             // end
 
@@ -70,6 +175,20 @@
         {
 
             // code here
+            for (int i = 0; i < array.Length-1; i++)
+            {
+                int maxIndex = i;
+                for (int k=i+1;k<array.Length;k++)
+                {
+                 if (array[k] > array[maxIndex])
+                     {
+                        maxIndex = k;
+                     }
+                }
+                int temp = array[i];
+                array[i] = array[maxIndex];
+                array[maxIndex] = temp;
+            }
 
             // end
 
@@ -78,6 +197,12 @@
         {
 
             // code here
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                int temp = array[i];
+                array[i] = array[array.Length - 1 - i];
+                array[array.Length - 1 - i] = temp;
+            }
 
             // end
 
@@ -87,6 +212,21 @@
             int[] C = null;
 
             // code here
+            C=new int[A.Length+B.Length];
+            int k = 0;
+            for (int i = 0; i < Math.Max(A.Length, B.Length);i++)
+            {
+                if (i<A.Length)
+                {
+                    C[k] = A[i];
+                    k++;
+                }
+                if (i<B.Length)
+                    {
+                    C[k] = B[i];
+                    k++;
+                    }
+            }
 
             // end
 
@@ -97,6 +237,22 @@
             double[] array = null;
 
             // code here
+            if (a == b && n == 1)
+            {
+                return new double[] { a };
+            }
+
+            if (n < 2 || a == b)
+            {
+                return null;
+            }
+            array = new double[n];
+            double step=(b-a)/(n-1);
+            for (int i = 0; i < n; i++)
+            {
+                array[i] = a + step * i;
+            }
+
 
             // end
 
@@ -108,6 +264,30 @@
             double[] restored = null;
 
             // code here
+            if (raw.Length >= 3)
+            {
+                restored = new double[raw.Length];
+
+                for (int i = 0; i < raw.Length; i++)
+                {
+                    restored[i] = raw[i];
+                }
+
+                for (int i = 0; i < raw.Length; i++)
+                {
+                    if (raw[i] == -1)
+                    {
+                        int left = (i - 1 + raw.Length) % raw.Length;
+                        int right = (i + 1) % raw.Length;
+
+                        if (raw[left] != -1 && raw[right] != -1)
+                        {
+                            restored[i] = (raw[left] + raw[right]) / 2.0;
+                        }
+                    }
+                }
+            }
+
 
             // end
 
