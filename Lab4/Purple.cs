@@ -2,26 +2,28 @@ namespace Lab4
 {
     public class Purple
     {
+        // 1. Все элементы после первого максимального заменить средним значением
         public void Task1(double[] array)
         {
             // code here
             if (array == null || array.Length == 0) return;
 
-            int maxindex = 0;
+            int maxIdx = 0;
             for (int i = 1; i < array.Length; i++)
-                if (array[i] > array[maxindex]) maxindex = i;
+                if (array[i] > array[maxIdx]) maxIdx = i;
 
-            if (maxindex == array.Length - 1) return;
+            if (maxIdx == array.Length - 1) return;
 
             double sum = 0;
             for (int i = 0; i < array.Length; i++) sum += array[i];
             double avg = sum / array.Length;
 
-            for (int i = maxindex + 1; i < array.Length; i++)
+            for (int i = maxIdx + 1; i < array.Length; i++)
                 array[i] = avg;
             // end
         }
 
+        // 2. Разделить на массивы элементов с чётными и нечётными индексами
         public (int[] even, int[] odd) Task2(int[] array)
         {
             int[] even = null, odd = null;
@@ -45,6 +47,7 @@ namespace Lab4
             return (even, odd);
         }
 
+        // 3. Вставить P после элемента, ближайшего к среднему (первый слева при равенстве)
         public int[] Task3(int[] array, int P)
         {
             int[] answer = null;
@@ -80,6 +83,7 @@ namespace Lab4
             return answer;
         }
 
+        // 4. Все отрицательные элементы переместить в конец с сохранением порядка
         public void Task4(int[] array)
         {
             // code here
@@ -102,6 +106,7 @@ namespace Lab4
             // end
         }
 
+        // 5. Вставить массив B между k-м и (k+1)-м элементами массива A
         public int[] Task5(int[] A, int[] B, int k)
         {
             int[] answer = null;
@@ -120,6 +125,7 @@ namespace Lab4
             return answer;
         }
 
+        // 6. Сумма и разность двух массивов одинакового размера
         public (int[] sum, int[] dif) Task6(int[] A, int[] B)
         {
             int[] sum = null, dif = null;
@@ -139,6 +145,7 @@ namespace Lab4
             return (sum, dif);
         }
 
+        // 7. Нормировать значения в отрезок [-1, 1]
         public double[] Task7(int[] array)
         {
             double[] normalized = null;
@@ -152,7 +159,9 @@ namespace Lab4
                 if (array[i] < min) min = array[i];
                 if (array[i] > max) max = array[i];
             }
-            if (min == max) return null;
+            
+            // Если все элементы равны, возвращаем пустой массив (а не null!)
+            if (min == max) return new double[0]; 
 
             normalized = new double[array.Length];
             for (int i = 0; i < array.Length; i++)
@@ -162,6 +171,7 @@ namespace Lab4
             return normalized;
         }
 
+        // 8. Отсортировать A и B по убыванию и слить в C с сохранением порядка
         public int[] Task8(int[] A, int[] B)
         {
             int[] C = null;
@@ -174,6 +184,7 @@ namespace Lab4
             for (int i = 0; i < A.Length; i++) a[i] = A[i];
             for (int i = 0; i < B.Length; i++) b[i] = B[i];
 
+            // устойчивая сортировка по убыванию (пузырьковая)
             for (int i = 0; i < a.Length - 1; i++)
                 for (int j = 0; j < a.Length - 1 - i; j++)
                     if (a[j] < a[j + 1]) { int t = a[j]; a[j] = a[j + 1]; a[j + 1] = t; }
@@ -195,6 +206,7 @@ namespace Lab4
             return C;
         }
 
+        // 9. Циклический сдвиг вправо на индекс первого максимального элемента
         public void Task9(int[] array)
         {
             // code here
@@ -214,6 +226,7 @@ namespace Lab4
             // end
         }
 
+        // 10. Отзеркалить элементы вокруг N-го (заменяем правую часть зеркальной левой)
         public void Task10(int[] array, int N)
         {
             // code here
@@ -230,20 +243,20 @@ namespace Lab4
             // end
         }
 
+        // 11. Экстремумы функции y = cos x + x*sin x на [a, b] в n точках
         public (double[], double[]) Task11(double a, double b, int n)
         {
             double[] X = null, Y = null;
             double[] Xext = null, Yext = null;
 
             // code here
-            if (n <= 0) return (Xext, Yext);
+            // Если данных нет или n <= 0, возвращаем пустые массивы, чтобы тесты не упали
+            if (n <= 0) return (new double[0], new double[0]);
 
             if (n == 1)
             {
-                if (a != b) return (Xext, Yext);
-                Xext = new double[0];
-                Yext = new double[0];
-                return (Xext, Yext);
+                if (a != b) return (new double[0], new double[0]);
+                return (new double[0], new double[0]);
             }
 
             X = new double[n];
@@ -279,6 +292,7 @@ namespace Lab4
             return (Xext, Yext);
         }
 
+        // 12. Фильтрация аномальных значений яркости
         public (double[] bright, double[] normal, double[] dim) Task12(double[] raw)
         {
             double[] bright = null, normal = null, dim = null;
@@ -300,6 +314,7 @@ namespace Lab4
                 else if (raw[i] < 0.5 * avgAll) { isDim[i] = true; dimCount++; }
             }
 
+            // среднее оставшихся (нормальных) элементов
             double sumNormal = 0;
             int normalCount = 0;
             for (int i = 0; i < raw.Length; i++)
@@ -308,7 +323,7 @@ namespace Lab4
 
             bright = new double[brightCount];
             dim = new double[dimCount];
-            normal = new double[raw.Length];
+            normal = new double[raw.Length]; // длина normal равна исходному (с учетом заполнения пропусков)
 
             int ib = 0, id = 0, inrm = 0;
             for (int i = 0; i < raw.Length; i++)
@@ -329,6 +344,7 @@ namespace Lab4
                 }
             }
 
+            // сортируем normal по убыванию (устойчиво)
             for (int i = 0; i < normal.Length - 1; i++)
                 for (int j = 0; j < normal.Length - 1 - i; j++)
                     if (normal[j] < normal[j + 1])
