@@ -36,14 +36,13 @@ namespace Lab4
             // code here
             int maxx = int.MinValue, ind_max = 0;
             for (int i = 0; i < array.Length; ++i) {
-                if (array[i] >= maxx) {
+                if (array[i] > maxx) {
                     maxx = array[i];
                     ind_max = i;
                 }
             }
             if (ind_max != array.Length - 1) {
                 int minn = int.MaxValue, ind_min = ind_max + 1;
-                int start_value = array[ind_max + 1];
                 for (int i = ind_max + 1; i < array.Length; ++i) {
                     if (array[i] < minn) {
                         minn = array[i];
@@ -189,7 +188,7 @@ namespace Lab4
             int ind_A = 0, ind_B = 0, ind_C = 0;
             while (A.Length > ind_A || B.Length > ind_B)
             {
-                if (ind_C < A.Length)
+                if (ind_A < A.Length && (ind_C % 2 == 0 || ind_B >= B.Length))
                 {
                     C[ind_C] = A[ind_A];
                     ++ind_A;
@@ -248,6 +247,48 @@ namespace Lab4
             double[] restored = null;
 
             // code here
+            if (raw.Length < 3)
+                return null;
+            bool is_same = true;
+            for (int i = 0; i < raw.Length; ++i) {
+                if (raw[i] != -1) {
+                    is_same = false;
+                    break;
+                }
+            }
+            if (is_same)
+                return raw;
+            restored = new double[raw.Length];
+            for (int i = 0; i < raw.Length; ++i)
+                restored[i] = raw[i];
+
+            for (int i = 0; i < restored.Length; ++i)
+            {
+                if (restored[i] == -1)
+                {
+                    if (i != 0 && i != restored.Length - 1)
+                    {
+                        if (restored[i - 1] != -1 && restored[i + 1] != -1)
+                        {
+                            restored[i] = (restored[i - 1] + restored[i + 1]) / 2;
+                        }
+                    }
+                    if (i == 0)
+                    {
+                        if (restored[restored.Length - 1] != -1 && restored[i + 1] != -1)
+                        {
+                            restored[i] = (restored[restored.Length - 1] + restored[i + 1]) / 2;
+                        }
+                    }
+                    if (i == restored.Length - 1)
+                    {
+                        if (restored[i - 1] != -1 && restored[0] != -1)
+                        {
+                            restored[i] = (restored[i - 1] + restored[0]) / 2;
+                        }
+                    }
+                }
+            }
 
             // end
 
