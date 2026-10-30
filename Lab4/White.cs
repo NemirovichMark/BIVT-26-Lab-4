@@ -294,10 +294,11 @@ array = result;
         {
     
             // code here
-    if (raw == null || raw.Length < 3) return null;
+    if (raw == null ) return null;
   double[] restored = (double[])raw.Clone();
             
-    bool allDamaged = true;
+    if (raw.Length <3) return restored;
+            bool allDamaged = true;
     for (int i = 0; i < raw.Length; i++)
     {
         if (raw[i] != -1.0)
@@ -313,22 +314,12 @@ array = result;
     {
         if (raw[i] == -1.0)
         {
-            // 1. Find nearest valid neighbor to the left
-            int left = i - 1;
-            while (left >= 0 && raw[left] == -1.0) left--;
-
-            // 2. Find nearest valid neighbor to the right
-            int right = i + 1;
-            while (right < raw.Length && raw[right] == -1.0) right++;
-
-            // 3. If valid neighbors exist on both sides, calculate the average
-            if (left >= 0 && right < raw.Length)
-            {
-                restored[i] = (raw[left] + raw[right]) / 2.0;
-            }
-        }
-    }
-    
+                if (raw [i - 1] != -1.0 && raw[i + 1] != -1.0)
+                {
+                       restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
+                   }
+               }
+                }
             // end
 
             return restored;
