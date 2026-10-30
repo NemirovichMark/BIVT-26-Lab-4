@@ -124,7 +124,7 @@ namespace Lab4
                 return answer;
 
             if (k < 0 || k > A.Length)
-                return A;
+                return answer;
 
             answer = new int[A.Length + B.Length];
 
@@ -321,11 +321,14 @@ namespace Lab4
             double[] Xext = null, Yext = null;
 
             // code here
-            if (n <= 0)
-                return (new double[0], new double[0]);
+            if (a > b)
+                return (null, null);
 
             if (n < 3)
                 return (new double[0], new double[0]);
+
+            if (a == b)
+                return (null, null);
 
             X = new double[n];
             Y = new double[n];
