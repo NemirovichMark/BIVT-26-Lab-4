@@ -188,8 +188,8 @@ namespace Lab4
         // Task 10: Alternate merge elements from arrays A and B
         public int[] Task10(int[] A, int[] B)
         {
-            if (A == null) A = new int;
-            if (B == null) B = new int;
+            if (A == null) A = new int[0];
+            if (B == null) B = new int[0];
 
             int[] C = new int[A.Length + B.Length];
             int a = 0, b = 0, c = 0;
