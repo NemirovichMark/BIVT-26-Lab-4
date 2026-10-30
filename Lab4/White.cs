@@ -4,57 +4,40 @@ namespace Lab4
 {
     public class White
     {
-        // Task 1: Find the product of elements between the first and second negative numbers
-        public void Task1(int[] array)
+        // Task 1: Find the geometric length of the vector (square root of sum of squares)
+        public double Task1(int[] vector)
         {
-            if (array == null || array.Length < 3) return;
+            double length = 0;
+            if (vector == null || vector.Length == 0) return 0;
 
-            int firstNegative = -1;
-            for (int i = 0; i < array.Length; i++)
+            double sumOfSquares = 0;
+            for (int i = 0; i < vector.Length; i++)
             {
-                if (array[i] < 0)
-                {
-                    firstNegative = i;
-                    break;
-                }
+                sumOfSquares += (double)vector[i] * vector[i];
             }
 
-            int secondNegative = -1;
-            for (int i = firstNegative + 1; i < array.Length; i++)
-            {
-                if (array[i] < 0)
-                {
-                    secondNegative = i;
-                    break;
-                }
-            }
-
-            if (firstNegative == -1 || secondNegative == -1 || secondNegative - firstNegative <= 1) return;
-
-            int product = 1;
-            for (int i = firstNegative + 1; i < secondNegative; i++)
-            {
-                product *= array[i];
-            }
+            length = Math.Sqrt(sumOfSquares);
+            return length;
         }
 
-        // Task 2: Swap the maximum element with the first element of the array
-        public void Task2(int[] array)
+        // Task 2: Count how many elements sit strictly between boundaries P and Q
+        public int Task2(int[] array, int P, int Q)
         {
-            if (array == null || array.Length < 2) return;
+            int count = 0;
+            if (array == null) return 0;
 
-            int maxIndex = 0;
-            for (int i = 1; i < array.Length; i++)
+            int minBound = Math.Min(P, Q);
+            int maxBound = Math.Max(P, Q);
+
+            for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] > array[maxIndex])
+                if (array[i] > minBound && array[i] < maxBound)
                 {
-                    maxIndex = i;
+                    count++;
                 }
             }
 
-            int temp = array[0];
-            array[0] = array[maxIndex];
-            array[maxIndex] = temp;
+            return count;
         }
 
         // Task 3: Find the minimum element after the maximum element and swap them
@@ -157,58 +140,56 @@ namespace Lab4
                 if (array[i] >= 0) count++;
             }
 
-            int[] result = new int[count];
+            int[] answer = new int[count];
             int j = 0;
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] >= 0)
                 {
-                    result[j] = array[i];
+                    answer[j] = array[i];
                     j++;
                 }
             }
-            return result;
+            return answer;
         }
 
-        // Task 8: Sort descending via a copy
-        public int[] Task8(int[] array)
+        // Task 8: Sort descending in-place directly on the array (void method)
+        public void Task8(int[] array)
         {
-            if (array == null) return null;
+            if (array == null) return;
 
-            int[] result = (int[])array.Clone();
-            for (int i = 0; i < result.Length - 1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                for (int j = i + 1; j < result.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (result[i] < result[j])
+                    if (array[i] < array[j])
                     {
-                        int temp = result[i];
-                        result[i] = result[j];
-                        result[j] = temp;
+                        int temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
                     }
                 }
             }
-            return result;
         }
 
-        // Task 9: Reverse copy elements into a new array
-        public int[] Task9(int[] array)
+        // Task 9: Reverse elements in-place directly on the array (void method)
+        public void Task9(int[] array)
         {
-            if (array == null) return null;
+            if (array == null) return;
 
-            int[] result = new int[array.Length];
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length / 2; i++)
             {
-                result[i] = array[array.Length - 1 - i];
+                int temp = array[i];
+                array[i] = array[array.Length - 1 - i];
+                array[array.Length - 1 - i] = temp;
             }
-            return result;
         }
 
         // Task 10: Alternate merge elements from arrays A and B
         public int[] Task10(int[] A, int[] B)
         {
-            if (A == null) A = new int[0];
-            if (B == null) B = new int[0];
+            if (A == null) A = new int;
+            if (B == null) B = new int;
 
             int[] C = new int[A.Length + B.Length];
             int a = 0, b = 0, c = 0;
@@ -228,8 +209,6 @@ namespace Lab4
         // Task 11: Create an array of n equally spaced values between a and b
         public double[] Task11(double a, double b, int n)
         {
-            double[] array = null;
-
             if (n <= 1) return null;
 
             double[] result = new double[n];
@@ -240,11 +219,10 @@ namespace Lab4
                 result[i] = a + step * i;
             }
 
-            result[0] = a;
+            result = a;
             result[n - 1] = b;
 
-            array = result;
-            return array;
+            return result;
         }
 
         // Task 12: Restore damaged elements marked with -1.0 using nearest valid neighbors
