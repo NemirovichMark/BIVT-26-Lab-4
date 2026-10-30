@@ -1,3 +1,5 @@
+using System;
+
 namespace Lab4
 {
     public class Green
@@ -181,8 +183,12 @@ namespace Lab4
                 if (array[i] == maxVal)
                 {
                     array[i] = runningSum;
+                    runningSum = runningSum + maxVal;
                 }
-                runningSum += array[i];
+                else
+                {
+                    runningSum += array[i];
+                }
             }
         }
 
@@ -269,7 +275,7 @@ namespace Lab4
         {
             double[] A = null, B = null;
 
-            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b)) return B;
+            if (n < 1 || (n != 1 && a == b) || (n == 1 && a != b)) return null;
 
             A = new double[n];
             for (int i = 0; i < n; i++)
@@ -340,7 +346,7 @@ namespace Lab4
 
             for (int i = 0; i < n; i++)
             {
-                if (result[i] > 6)
+                if (result[i] > dices[i])
                 {
                     wins++;
                 }
