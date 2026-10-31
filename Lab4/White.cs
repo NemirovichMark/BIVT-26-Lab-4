@@ -125,7 +125,7 @@ namespace Lab4
 
         public int[] Task7(int[] array)
         {
-            int[] answer = null;
+            int[] answer = Array.Empty<int>();
             // code here
             List<int> list = new List<int>();
             foreach (var num in array)
@@ -172,7 +172,7 @@ namespace Lab4
 
         public int[] Task10(int[] A, int[] B)
         {
-            int[] answer = null;
+            int[] answer = Array.Empty<int>();
             // code here
             List<int> list = new List<int>();
             int i = 0;
@@ -227,7 +227,7 @@ namespace Lab4
 
         public int[] Task12(int[] raw)
         {
-            int[] restored = null;
+            int[] restored = Array.Empty<int>();
             // code here
             restored = (int[])raw.Clone();
             if (raw.Length < 3)
