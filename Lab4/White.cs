@@ -90,15 +90,15 @@ namespace Lab4
             int index = 0;
 
             // code here
-            index = -1;
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == P)
                 {
-                    index = i;
-                    break;
+                    return i;
                 }
             }
+            return -1;
+        }
             // end
 
             return index;
