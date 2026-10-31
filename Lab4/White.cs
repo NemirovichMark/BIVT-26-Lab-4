@@ -2,12 +2,12 @@ namespace Lab4
 {
     public class White
     {
-        public double Task1(int[] vector)
+        public double Task1(double[] vector)
         {
             double length = 0;
             // code here
             double sumSquare = 0;
-            foreach (int num in vector)
+            foreach (double num in vector)
             {
                 sumSquare += num * num;
             }
@@ -199,7 +199,7 @@ namespace Lab4
 
         public double[] Task11(double a, double b, int n)
         {
-            double[] answer = null;
+            double[] answer;
             // code here
             if (a == b)
             {
@@ -209,7 +209,7 @@ namespace Lab4
                 }
                 else
                 {
-                    answer = null;
+                    answer = Array.Empty<double>();
                 }
             }
             else
