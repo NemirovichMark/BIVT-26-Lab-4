@@ -130,8 +130,25 @@ namespace Lab4
             int[] answer = null;
 
             // code here
-            return array.Where(x => x >= 0).ToArray();
-                        
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    count++;
+                }
+            }
+            answer = new int[count];
+            int k = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] >= 0)
+                {
+                    answer[k] = array[i];
+                    k++;
+                }
+            }
+
             // end
 
             return answer;
@@ -140,8 +157,20 @@ namespace Lab4
         {
 
             // code here
-            Array.Sort(array);
-            Array.Reverse(array);
+            for(int i = 0; i < array.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int k = i + 1; k < array.Length; k++)
+                {
+                    if (array[k] > array[maxIndex])
+                    {
+                        maxIndex = k;
+                    }
+                }
+                int temp = array[i];
+                array[i] = array[maxIndex];
+                array[maxIndex] = temp;
+            }
 
             // end
 
@@ -150,7 +179,12 @@ namespace Lab4
         {
 
             // code here
-            Array.Reverse(array);
+            for (int i = 0; i < array.Length / 2; i++)
+            {
+                int temp = array[i];
+                array[i] = array[array.Length - 1 - i];
+                array[array.Length - 1 - i] = temp;
+            }
 
             // end
 
