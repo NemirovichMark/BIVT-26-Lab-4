@@ -30,7 +30,6 @@ namespace Lab4
                 {
                     count++;
                 }
-            }
             // end
 
             return count;
@@ -59,7 +58,6 @@ namespace Lab4
                 {
                     minAfterIndex = i;
                 }
-            }
             int temp = array[maxIndex];
             array[maxIndex] = array[minAfterIndex];
             array[minAfterIndex] = temp;
@@ -140,7 +138,6 @@ namespace Lab4
                 {
                     list.Add(num);
                 }
-            }
             answer = list.ToArray();
             // end
             return answer;
@@ -163,8 +160,6 @@ namespace Lab4
                         array[j] = array[j + 1];
                         array[j + 1] = temp;
                     }
-                }
-            }
             // end
 
         }
@@ -259,11 +254,7 @@ namespace Lab4
                     {
                         restored[i] = (left + right) / 2;
                     }
-                }
-            }
             // end
 
             return restored;
         }
-    }
-}
