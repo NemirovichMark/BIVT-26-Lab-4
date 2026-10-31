@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Lab4.White
 {
     public class White
