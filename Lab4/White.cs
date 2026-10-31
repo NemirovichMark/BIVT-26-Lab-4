@@ -148,7 +148,7 @@ namespace Lab4
             // end
 
             return answer;
-        }
+        
         public void Task8(int[] array)
         {
 
