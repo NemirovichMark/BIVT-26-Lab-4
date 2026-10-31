@@ -1,4 +1,3 @@
-#nullable disable
 using System;
 
 namespace Lab4
@@ -209,6 +208,7 @@ namespace Lab4
                         {
                             restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
                         }
+                    }
                     else if (i == 0)
                     {
                         if (raw[1] != -1 && raw[2] != -1)
