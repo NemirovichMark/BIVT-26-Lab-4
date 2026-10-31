@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Lab4
 {
     public class White
@@ -5,7 +8,6 @@ namespace Lab4
         public double Task1(int[] vector)
         {
             double length = 0;
-
             // code here
             double sumSquare = 0;
             foreach (int num in vector)
@@ -14,13 +16,12 @@ namespace Lab4
             }
             length = Math.Sqrt(sumSquare);
             // end
-
             return length;
         }
+
         public int Task2(int[] array, int P, int Q)
         {
             int count = 0;
-
             // code here
             int minBorder = Math.Min(P, Q);
             int maxBorder = Math.Max(P, Q);
@@ -30,13 +31,13 @@ namespace Lab4
                 {
                     count++;
                 }
+            }
             // end
-
             return count;
         }
+
         public void Task3(int[] array)
         {
-
             // code here
             if (array.Length <= 1)
                 return;
@@ -51,6 +52,7 @@ namespace Lab4
             int startPos = maxIndex + 1;
             if (startPos >= array.Length)
                 return;
+
             int minAfterIndex = startPos;
             for (int i = startPos; i < array.Length; i++)
             {
@@ -58,15 +60,15 @@ namespace Lab4
                 {
                     minAfterIndex = i;
                 }
+            }
             int temp = array[maxIndex];
             array[maxIndex] = array[minAfterIndex];
             array[minAfterIndex] = temp;
             // end
-
         }
+
         public void Task4(int[] array)
         {
-
             // code here
             int maxValue = int.MinValue;
             int idx = -1;
@@ -83,29 +85,27 @@ namespace Lab4
                 array[idx] = idx;
             }
             // end
-
         }
+
         public int Task5(int[] array, int P)
         {
             int index = 0;
-
             // code here
+            index = -1;
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == P)
                 {
-                    return i;
+                    index = i;
+                    break;
                 }
             }
-            return -1;
-        }
             // end
-
             return index;
         }
+
         public void Task6(int[] array)
         {
-
             // code here
             if (array.Length <= 1)
                 return;
@@ -124,12 +124,11 @@ namespace Lab4
                 array[i + 1] = temp;
             }
             // end
-
         }
+
         public int[] Task7(int[] array)
         {
             int[] answer = null;
-
             // code here
             List<int> list = new List<int>();
             foreach (var num in array)
@@ -138,17 +137,14 @@ namespace Lab4
                 {
                     list.Add(num);
                 }
+            }
             answer = list.ToArray();
             // end
             return answer;
         }
-            // end
 
-            return answer;
-        
         public void Task8(int[] array)
         {
-
             // code here
             for (int i = 0; i < array.Length - 1; i++)
             {
@@ -160,12 +156,13 @@ namespace Lab4
                         array[j] = array[j + 1];
                         array[j + 1] = temp;
                     }
+                }
+            }
             // end
-
         }
+
         public void Task9(int[] array)
         {
-
             // code here
             for (int i = 0; i < array.Length / 2; i++)
             {
@@ -174,12 +171,11 @@ namespace Lab4
                 array[array.Length - 1 - i] = temp;
             }
             // end
-
         }
+
         public int[] Task10(int[] A, int[] B)
         {
-            int[] C = null;
-
+            int[] answer = null;
             // code here
             List<int> list = new List<int>();
             int i = 0;
@@ -201,13 +197,12 @@ namespace Lab4
             }
             answer = list.ToArray();
             // end
-
-            return C;
+            return answer;
         }
+
         public double[] Task11(double a, double b, int n)
         {
-            double[] array = null;
-
+            double[] answer = null;
             // code here
             if (a == b)
             {
@@ -230,14 +225,12 @@ namespace Lab4
                 }
             }
             // end
-
-            return array;
+            return answer;
         }
 
-        public double[] Task12(double[] raw)
+        public int[] Task12(int[] raw)
         {
-            double[] restored = null;
-
+            int[] restored = null;
             // code here
             restored = (int[])raw.Clone();
             if (raw.Length < 3)
@@ -254,7 +247,10 @@ namespace Lab4
                     {
                         restored[i] = (left + right) / 2;
                     }
+                }
+            }
             // end
-
             return restored;
         }
+    }
+}
