@@ -1,6 +1,3 @@
-#pragma warning disable
-using System;
-
 namespace Lab4
 {
     public class White
