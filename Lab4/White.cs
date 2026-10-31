@@ -1,3 +1,4 @@
+#pragma warning disable
 using System;
 
 namespace Lab4
@@ -6,6 +7,7 @@ namespace Lab4
     {
         public double Task1(int[] vector)
         {
+            if (vector == null) return 0;
             double length = 0;
             double sum = 0;
             for (int i = 0; i < vector.Length; i++)
@@ -18,6 +20,7 @@ namespace Lab4
 
         public int Task2(int[] array, int P, int Q)
         {
+            if (array == null) return 0;
             int count = 0;
             int min = Math.Min(P, Q);
             int max = Math.Max(P, Q);
@@ -74,6 +77,7 @@ namespace Lab4
 
         public int Task5(int[] array, int P)
         {
+            if (array == null) return -1;
             int index = 0;
             index = Array.IndexOf(array, P);
             return index;
@@ -181,11 +185,8 @@ namespace Lab4
 
         public double[] Task12(double[] raw)
         {
-            double[] restored = null;
             if (raw == null) return null;
-            
-            restored = (double[])raw.Clone();
-            if (raw.Length < 3) return restored;
+            if (raw.Length < 3) return null;
 
             bool allBroken = true;
             for (int i = 0; i < raw.Length; i++)
@@ -196,19 +197,29 @@ namespace Lab4
                     break;
                 }
             }
-            if (allBroken) return restored;
+            if (allBroken) return (double[])raw.Clone();
 
             int n = raw.Length;
+            double[] restored = (double[])raw.Clone();
+
             for (int i = 0; i < n; i++)
             {
                 if (raw[i] == -1)
                 {
-                    int left = (i - 1 + n) % n;
-                    int right = (i + 1) % n;
-
-                    if (raw[left] != -1 && raw[right] != -1)
+                    if (i == 0)
                     {
-                        restored[i] = (raw[left] + raw[right]) / 2.0;
+                        if (raw[1] != -1 && raw[2] != -1)
+                            restored[i] = (raw[1] + raw[2]) / 2.0;
+                    }
+                    else if (i == n - 1)
+                    {
+                        if (raw[i - 1] != -1 && raw[i - 2] != -1)
+                            restored[i] = (raw[i - 1] + raw[i - 2]) / 2.0;
+                    }
+                    else
+                    {
+                        if (raw[i - 1] != -1 && raw[i + 1] != -1)
+                            restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
                     }
                 }
             }
