@@ -194,6 +194,8 @@ namespace Lab4
                 if (a == b) return new double[] { a };
                 return null;
             }
+            
+            if (a == b) return null;
 
             array = new double[n];
             double step = (b - a) / (n - 1);
@@ -228,16 +230,26 @@ namespace Lab4
             }
             if (allBroken) return restored;
 
-            for (int i = 1; i < raw.Length - 1; i++)
+            for (int i = 0; i < raw.Length; i++)
             {
-                if (raw[i] == -1 && raw[i - 1] != -1 && raw[i + 1] != -1)
+                if (raw[i] == -1)
                 {
-                    restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
-                }
-            }
-            // end
-            
-            return restored;
-        }
-    }
-}
+                    if (i > 0 && i < raw.Length - 1) 
+                    {
+                        if (raw[i - 1] != -1 && raw[i + 1] != -1)
+                        {
+                            restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
+                        }
+                    }
+                    else if (i == 0) 
+                    {
+                        if (raw[1] != -1 && raw[2] != -1)
+                        {
+                            restored[i] = (raw[1] + raw[2]) / 2.0;
+                        }
+                    }
+                    else if (i == raw.Length - 1) 
+                    {
+                        if (raw[i - 1] != -1 && raw[i - 2] != -1)
+                        {
+                            restored[i] = (raw[i - 1] +
