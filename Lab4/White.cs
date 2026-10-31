@@ -194,7 +194,6 @@ namespace Lab4
                 if (a == b) return new double[] { a };
                 return null;
             }
-            
             if (a == b) return null;
 
             array = new double[n];
@@ -252,4 +251,14 @@ namespace Lab4
                     {
                         if (raw[i - 1] != -1 && raw[i - 2] != -1)
                         {
-                            restored[i] = (raw[i - 1] +
+                            restored[i] = (raw[i - 1] + raw[i - 2]) / 2.0;
+                        }
+                    }
+                }
+            }
+            // end
+            
+            return restored;
+        }
+    }
+}
