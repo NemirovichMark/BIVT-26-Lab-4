@@ -198,30 +198,21 @@ namespace Lab4
             }
             if (allBroken) return restored;
 
-            for (int i = 0; i < raw.Length; i++)
+            int n = raw.Length;
+            // 环形数组的真谛：首尾相连
+            for (int i = 0; i < n; i++)
             {
                 if (raw[i] == -1)
                 {
-                    if (i > 0 && i < raw.Length - 1)
+                    // 环形左邻居
+                    int left = (i - 1 + n) % n;
+                    // 环形右邻居
+                    int right = (i + 1) % n;
+
+                    // 如果左右邻居都不是 -1，求平均
+                    if (raw[left] != -1 && raw[right] != -1)
                     {
-                        if (raw[i - 1] != -1 && raw[i + 1] != -1)
-                        {
-                            restored[i] = (raw[i - 1] + raw[i + 1]) / 2.0;
-                        }
-                    }
-                    else if (i == 0)
-                    {
-                        if (raw[1] != -1 && raw[2] != -1)
-                        {
-                            restored[i] = (raw[1] + raw[2]) / 2.0;
-                        }
-                    }
-                    else if (i == raw.Length - 1)
-                    {
-                        if (raw[i - 1] != -1 && raw[i - 2] != -1)
-                        {
-                            restored[i] = (raw[i - 1] + raw[i - 2]) / 2.0;
-                        }
+                        restored[i] = (raw[left] + raw[right]) / 2.0;
                     }
                 }
             }
