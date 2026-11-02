@@ -97,6 +97,31 @@
             double[] array = null;
 
             // code here
+             if (n <= 0)
+    {
+        array = null;
+    }
+    else if (n == 1)
+    {
+        if (a == b)
+            array = new double[] { a };
+        else
+            array = null;
+    }
+    else if (a == b)
+    {
+        array = null;
+    }
+    else
+    {
+        array = new double[n];
+        double step = (b - a) / (n - 1);
+
+        for (int i = 0; i < n; i++)
+        {
+            array[i] = a + i * step;
+        }
+    }
 
             // end
 
