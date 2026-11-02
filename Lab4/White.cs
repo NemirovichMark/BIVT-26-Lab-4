@@ -5,7 +5,6 @@ namespace Lab4
         public double Task1(int[] vector)
         {
             double length = 0;
-
             // code here
             if (vector == null) return 0;
             double sum = 0;
@@ -15,13 +14,11 @@ namespace Lab4
             }
             length = Math.Sqrt(sum);
             // end
-
             return length;
         }
         public int Task2(int[] array, int P, int Q)
         {
             int count = 0;
-
             // code here
             if (array == null) return 0;
             int min = P < Q ? P : Q;
@@ -31,12 +28,10 @@ namespace Lab4
                 if (array[i] > min && array[i] < max) count++;
             }
             // end
-
             return count;
         }
         public void Task3(int[] array)
         {
-
             // code here
             if (array == null || array.Length == 0) return;
             int maxIndex = 0;
@@ -55,11 +50,9 @@ namespace Lab4
             array[maxIndex] = array[minIndex];
             array[minIndex] = temp;
             // end
-
         }
         public void Task4(int[] array)
         {
-
             // code here
             if (array == null || array.Length == 0) return;
             int maxIndex = 0;
@@ -69,7 +62,6 @@ namespace Lab4
             }
             array[maxIndex] = maxIndex;
             // end
-
         }
         public int Task5(int[] array, int P)
         {
@@ -92,7 +84,6 @@ namespace Lab4
         }
         public void Task6(int[] array)
         {
-
             // code here
             if (array == null || array.Length == 0) return;
             int maxIndex = 0;
@@ -107,7 +98,6 @@ namespace Lab4
                 array[i + 1] = temp;
             }
             // end
-
         }
         public int[] Task7(int[] array)
         {
@@ -136,7 +126,6 @@ namespace Lab4
         }
         public void Task8(int[] array)
         {
-
             // code here
             if (array == null) return;
             for (int i = 0; i < array.Length - 1; i++)
@@ -151,7 +140,6 @@ namespace Lab4
                 array[maxIndex] = temp;
             }
             // end
-
         }
         public void Task9(int[] array)
         {
@@ -165,12 +153,10 @@ namespace Lab4
                 array[array.Length - 1 - i] = temp;
             }
             // end
-
         }
         public int[] Task10(int[] A, int[] B)
         {
             int[] C = null;
-
             // code here
             int lenA = A == null ? 0 : A.Length;
             int lenB = B == null ? 0 : B.Length;
@@ -215,14 +201,11 @@ namespace Lab4
                 array[n - 1] = b;
             }
             // end
-
             return array;
         }
-
         public double[] Task12(double[] raw)
         {
             double[] restored = null;
-
             // code here
             if (raw == null || raw.Length < 3) return null;
             int n = raw.Length;
