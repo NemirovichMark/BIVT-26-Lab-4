@@ -250,6 +250,7 @@ namespace Lab4
                     array[i] = a + i * step;
                 }
             }
+            //Не смог рашить 11
 
 
             // end
@@ -283,6 +284,7 @@ namespace Lab4
                     }
                 }
             }
+            //Не смог решить 12 
 
             // end
 
