@@ -361,14 +361,12 @@ namespace Lab4
 
         public double[] Task11(double a, double b, int n)
         {
-            double[] A = null, B = null;
-
-            if (n <= 0)
+            if (n <= 0 || a == b)
             {
                 return null;
             }
 
-            A = new double[n];
+            double[] A = new double[n];
 
             if (n == 1)
             {
@@ -395,7 +393,12 @@ namespace Lab4
                     count++;
                 }
             }
-            
+
+            if (count == 0)
+            {
+                return new double[0];
+            }
+
             double average = sum / count;
             int size = 0;
 
@@ -407,12 +410,7 @@ namespace Lab4
                 }
             }
 
-            if (size == 0)
-            {
-                return null;
-            }
-
-            B = new double[size];
+            double[] B = new double[size];
             int index = 0;
 
             for (int i = 0; i < A.Length; i++)
