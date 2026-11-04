@@ -1,3 +1,4 @@
+
 namespace Lab4
 {
     public class Green
@@ -59,8 +60,6 @@ namespace Lab4
 
         public int[] Task3(int[] array)
         {
-            int[] negatives = null;
-
             if (array.Length == 0)
             {
                 return new int[0];
@@ -106,7 +105,7 @@ namespace Lab4
                 }
             }
 
-            negatives = new int[count];
+            int[] negatives = new int[count];
             int index = 0;
 
             for (int i = start + 1; i < end; i++)
@@ -154,8 +153,6 @@ namespace Lab4
 
         public int[] Task5(int[] array)
         {
-            int[] answer = null;
-
             if (array.Length == 0)
             {
                 return new int[0];
@@ -181,7 +178,7 @@ namespace Lab4
                 }
             }
 
-            answer = new int[count];
+            int[] answer = new int[count];
             int index = 0;
 
             for (int i = 0; i < array.Length; i++)
@@ -259,14 +256,12 @@ namespace Lab4
 
         public int Task8(int[] array)
         {
-            int length = 0;
-
             if (array.Length == 0)
             {
-                return length;
+                return 0;
             }
 
-            length = 1;
+            int length = 1;
             int currentLength = 1;
 
             for (int i = 1; i < array.Length; i++)
@@ -311,7 +306,6 @@ namespace Lab4
 
         public int[] Task10(int[] array)
         {
-            int[] cleared = null;
             int count = 0;
 
             for (int i = 0; i < array.Length; i++)
@@ -333,7 +327,7 @@ namespace Lab4
                 }
             }
 
-            cleared = new int[count];
+            int[] cleared = new int[count];
             int index = 0;
 
             for (int i = 0; i < array.Length; i++)
@@ -367,19 +361,11 @@ namespace Lab4
             }
 
             double[] A = new double[n];
+            double step = (b - a) / (n - 1);
 
-            if (n == 1)
+            for (int i = 0; i < n; i++)
             {
-                A[0] = a;
-            }
-            else
-            {
-                double step = (b - a) / (n - 1);
-
-                for (int i = 0; i < n; i++)
-                {
-                    A[i] = a + i * step;
-                }
+                A[i] = a + i * step;
             }
 
             double sum = 0;
