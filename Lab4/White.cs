@@ -7,6 +7,9 @@
             double length = 0;
 
             // code here
+            for (int i = 0; i < vector.Length; i++)
+    length += vector[i] * vector[i];
+length = Math.Sqrt(length);
 
             // end
 
@@ -17,6 +20,9 @@
             int count = 0;
 
             // code here
+            for (int i = 0; i < array.Length; i++)
+    if (P < array[i] && Q > array[i])
+        count++;
 
             // end
 
@@ -26,6 +32,17 @@
         {
 
             // code here
+            int x = 0;
+for(int i =1; i < array.Length; i++)
+    if (array[x] < array[i])  
+        x = i;
+if (x == array.Length - 1)
+    return;
+int n = x + 1;
+for (int i = n + 1; i < array.Length; i++)
+    if (array[n] > array[i])
+        n = i;
+(array[n], array[x]) = (array[x], array[n]);
 
             // end
 
@@ -34,6 +51,18 @@
         {
 
             // code here
+            if (array == null || array.Length == 0)
+    return;
+
+int maxIndex = 0;
+
+for (int i = 2; i < array.Length; i += 2)
+{
+    if (array[i] > array[maxIndex])
+        maxIndex = i;
+}
+
+array[maxIndex] = maxIndex;
 
             // end
 
@@ -43,6 +72,18 @@
             int index = 0;
 
             // code here
+            index = -1;
+if (array != null)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i] == P)
+        {
+            index = i;
+            break;
+        }
+    }
+}
 
             // end
 
@@ -52,6 +93,22 @@
         {
 
             // code here
+            if (array == null || array.Length == 0)
+    return;
+
+int maxIndex = 0;
+for (int i = 1; i < array.Length; i++)
+{
+    if (array[i] > array[maxIndex])
+        maxIndex = i;
+}
+
+for (int i = 0; i + 1 < maxIndex; i += 2)
+{
+    int temp = array[i];
+    array[i] = array[i + 1];
+    array[i + 1] = temp;
+}
 
             // end
 
@@ -61,6 +118,26 @@
             int[] answer = null;
 
             // code here
+            if (array == null)
+    return null;
+
+int count = 0;
+for (int i = 0; i < array.Length; i++)
+{
+    if (array[i] >= 0)
+        count++;
+}
+
+answer = new int[count];
+int j = 0;
+for (int i = 0; i < array.Length; i++)
+{
+    if (array[i] >= 0)
+    {
+        answer[j] = array[i];
+        j++;
+    }
+}
 
             // end
 
@@ -70,6 +147,21 @@
         {
 
             // code here
+            if (array == null || array.Length == 0)
+    return;
+
+for (int i = 0; i < array.Length - 1; i++)
+{
+    for (int j = i + 1; j < array.Length; j++)
+    {
+        if (array[j] > array[i])
+        {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+}
 
             // end
 
@@ -78,6 +170,15 @@
         {
 
             // code here
+            if (array == null || array.Length <= 1)
+    return;
+
+for (int i = 0; i < array.Length / 2; i++)
+{
+    int temp = array[i];
+    array[i] = array[array.Length - 1 - i];
+    array[array.Length - 1 - i] = temp;
+}
 
             // end
 
@@ -87,6 +188,22 @@
             int[] C = null;
 
             // code here
+            if (A == null) A = new int[0];
+if (B == null) B = new int[0];
+
+if (A.Length == 0 || B.Length == 0)
+    return (int[])(A.Length == 0 ? B : A).Clone();
+
+C = new int[A.Length + B.Length];
+int i = 0, j = 0;
+
+for (int k = 0; k < C.Length; k++)
+{
+    if (j >= B.Length || (i < A.Length && k % 2 == 0))
+        C[k] = A[i++];
+    else
+        C[k] = B[j++];
+}
 
             // end
 
@@ -97,7 +214,7 @@
             double[] array = null;
 
             // code here
-             if (n <= 0)
+              if (n <= 0)
     {
         array = null;
     }
@@ -123,16 +240,49 @@
         }
     }
 
-            // end
-
-            return array;
+            // code here
+             if (raw == null || raw.Length < 3)
+    {
+        restored = null;
+    }
+    else
+    {
+        bool allDamaged = true;
+        for (int i = 0; i < raw.Length; i++)
+        {
+            if (raw[i] != -1)
+            {
+                allDamaged = false;
+                break;
+            }
         }
 
-        public double[] Task12(double[] raw)
+        if (allDamaged)
         {
-            double[] restored = null;
+            restored = (double[])raw.Clone();
+        }
+        else
+        {
+            restored = (double[])raw.Clone();
 
-            // code here
+            for (int i = 0; i < raw.Length; i++)
+            {
+                if (raw[i] == -1)
+                {
+                    int leftIndex = (i == 0) ? raw.Length - 1 : i - 1;
+                    int rightIndex = (i == raw.Length - 1) ? 0 : i + 1;
+
+                    double left = raw[leftIndex];
+                    double right = raw[rightIndex];
+
+                    if (left != -1 && right != -1)
+                    {
+                        restored[i] = (left + right) / 2.0;
+                    }
+                }
+            }
+        }
+    }
 
             // end
 
