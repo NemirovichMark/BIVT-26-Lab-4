@@ -395,12 +395,7 @@ namespace Lab4
                     count++;
                 }
             }
-
-            if (count == 0)
-            {
-                return null;
-            }
-
+            
             double average = sum / count;
             int size = 0;
 
