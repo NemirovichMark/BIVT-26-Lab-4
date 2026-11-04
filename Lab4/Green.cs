@@ -361,7 +361,7 @@ namespace Lab4
 
         public double[] Task11(double a, double b, int n)
         {
-            if (n <= 0 || a == b)
+            if (n <= 1 || a == b)
             {
                 return null;
             }
