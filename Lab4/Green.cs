@@ -1,4 +1,4 @@
-﻿namespace Lab4
+namespace Lab4
 {
     public class Green
     {
@@ -33,14 +33,24 @@
         public int Task2(int[] array)
         {
             int sum = 0;
+            int negativeIndex = -1;
 
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] < 0)
                 {
+                    negativeIndex = i;
                     break;
                 }
+            }
 
+            if (negativeIndex == -1)
+            {
+                return 0;
+            }
+
+            for (int i = 0; i < negativeIndex; i++)
+            {
                 sum += array[i] * array[i];
             }
 
@@ -355,7 +365,7 @@
 
             if (n <= 0)
             {
-                return new double[0];
+                return null;
             }
 
             A = new double[n];
@@ -388,7 +398,7 @@
 
             if (count == 0)
             {
-                return new double[0];
+                return null;
             }
 
             double average = sum / count;
@@ -400,6 +410,11 @@
                 {
                     size++;
                 }
+            }
+
+            if (size == 0)
+            {
+                return null;
             }
 
             B = new double[size];
